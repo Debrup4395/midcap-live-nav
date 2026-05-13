@@ -554,6 +554,11 @@ for fund_name, fund_data in funds.items():
         / previous_nav
     ) * 100
 
+    fund_performance.append({
+        "Fund": fund_name,
+        "Return": float(nav_change)
+    })
+
     st.markdown("---")
 
     st.subheader(fund_name)
@@ -590,7 +595,49 @@ for fund_name, fund_data in funds.items():
             use_container_width=True,
             height=400
         )
+# =====================================================
+# BEST & WORST FUND
+# =====================================================
 
+st.markdown("---")
+
+if len(fund_performance) > 0:
+
+    performance_df = pd.DataFrame(fund_performance)
+
+    best_fund = performance_df.loc[
+        performance_df["Return"].idxmax()
+    ]
+
+    worst_fund = performance_df.loc[
+        performance_df["Return"].idxmin()
+    ]
+
+    st.subheader("🏆 Fund Performance Today")
+
+    c1, c2 = st.columns(2)
+
+    c1.metric(
+        "Best Fund of the Day",
+        best_fund["Fund"],
+        f"{best_fund['Return']:.2f}%"
+    )
+
+    c2.metric(
+        "Worst Fund of the Day",
+        worst_fund["Fund"],
+        f"{worst_fund['Return']:.2f}%"
+    )
+
+# =====================================================
+# FOOTER
+# =====================================================
+
+st.markdown("---")
+
+st.caption(
+    "Live NAV estimation based on weighted portfolio stock movement."
+)
 st.markdown("---")
 
 st.caption(
