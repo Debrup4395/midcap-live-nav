@@ -492,48 +492,6 @@ india = pytz.timezone("Asia/Kolkata")
 current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
 
 st.write(f"Last Updated: {current_time}")
-performance_placeholder = st.empty()
-# =====================================================
-# PERFORMANCE TRACKER
-# =====================================================
-
-fund_performance = []
-# =====================================================
-# BEST & WORST FUND
-# =====================================================
-
-with performance_placeholder.container():
-
-    if len(fund_performance) > 0:
-
-        performance_df = pd.DataFrame(fund_performance)
-
-        best_fund = performance_df.loc[
-            performance_df["Return"].idxmax()
-        ]
-
-        worst_fund = performance_df.loc[
-            performance_df["Return"].idxmin()
-        ]
-
-        st.markdown("---")
-
-        st.subheader("🏆 Fund Performance Today")
-
-        col1, col2 = st.columns(2)
-
-        col1.metric(
-            "Best Fund of the Day",
-            best_fund["Fund"],
-            f"{best_fund['Return']:.2f}%"
-        )
-
-        col2.metric(
-            "Worst Fund of the Day",
-            worst_fund["Fund"],
-            f"{worst_fund['Return']:.2f}%"
-        )
-
 # =========================
 # NAV CALCULATION
 # =========================
@@ -586,59 +544,52 @@ for fund_name, fund_data in funds.items():
 
         except:
             continue
-        expected_nav = previous_nav * (
-            1 + weighted_return / 100
+
+    expected_nav = previous_nav * (
+        1 + weighted_return / 100
+    )
+
+    nav_change = (
+        (expected_nav - previous_nav)
+        / previous_nav
+    ) * 100
+
+    st.markdown("---")
+
+    st.subheader(fund_name)
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Previous NAV",
+        f"₹{previous_nav:.2f}"
+    )
+
+    col2.metric(
+        "Expected NAV",
+        f"₹{expected_nav:.2f}",
+        f"{nav_change:.2f}%"
+    )
+
+    col3.metric(
+        "Portfolio Move",
+        f"{weighted_return:.2f}%"
+    )
+
+    df = pd.DataFrame(stock_rows)
+
+    if not df.empty:
+
+        df = df.sort_values(
+            by="Weight %",
+            ascending=False
         )
 
-        nav_change = (
-            (expected_nav - previous_nav)
-            / previous_nav
-        ) * 100
-
-        fund_performance.append({
-            "Fund": fund_name,
-            "Return": float(nav_change)
-        })
-
-        st.markdown("---")
-
-        st.subheader(fund_name)
-
-        col1, col2, col3 = st.columns(3)
-
-        col1.metric(
-            "Previous NAV",
-            f"₹{previous_nav:.2f}"
+        st.dataframe(
+            df,
+            use_container_width=True,
+            height=400
         )
-
-        col2.metric(
-            "Expected NAV",
-            f"₹{expected_nav:.2f}",
-            f"{nav_change:.2f}%"
-        )
-
-        col3.metric(
-            "Portfolio Move",
-            f"{weighted_return:.2f}%"
-        )
-
-        df = pd.DataFrame(stock_rows)
-
-        if not df.empty:
-
-            df = df.sort_values(
-                by="Weight %",
-                ascending=False
-            )
-
-            st.dataframe(
-                df,
-                use_container_width=True,
-                height=400
-            )
-# =====================================================
-# FOOTER
-# =====================================================
 
 st.markdown("---")
 
