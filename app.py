@@ -17,13 +17,13 @@ st_autorefresh(interval=300000, key="refresh")
 # -----------------------------
 
 funds = {
+
     "HSBC Midcap Fund": {
         "nav": 482.33,
         "holdings": {
             "BSE.NS": 5.13,
-            "POWERINDIA.NS": 4.94,
-            "NYKAA.NS": 4.85,
             "POWERINDIA.NS": 4.72,
+            "NYKAA.NS": 4.85,
             "FEDERALBNK.NS": 3.86,
             "PIRAMAL.NS": 3.51,
             "POLICYBZR.NS": 3.43,
@@ -50,18 +50,7 @@ funds = {
             "APLAPOLLO.NS": 0.65,
             "JSWSTEEL.NS": 0.60,
             "ECLERX.NS": 0.29,
-            "RBLBANK.NS": 0.10,
-            "MUTHOOTFIN.NS": 0.04,
-            "MAXFIN.NS": 0.04,
-            "IDFCFIRSTB.NS": 0.04,
-            "COFORGE.NS": 0.04,
-            "MAZDOCK.NS": 0.03,
-            "JKCEMENT.NS": 0.03,
-            "KPITTECH.NS": 0.03,
-            "DIXON.NS": 0.02,
-            "SWIGGY.NS": 0.02,
-            "INDHOTEL.NS": 0.02,
-            "PERSISTENT.NS": 0.02
+            "RBLBANK.NS": 0.10
         }
     },
 
@@ -97,43 +86,7 @@ funds = {
             "JSL.NS": 1.38,
             "KEI.NS": 1.37,
             "MAXFIN.NS": 1.37,
-            "POLICYBZR.NS": 1.36,
-            "ASHOKLEY.NS": 1.35,
-            "IPCALAB.NS": 1.32,
-            "MAXHEALTH.NS": 1.31,
-            "SUNDARMFIN.NS": 1.22,
-            "PHOENIXLTD.NS": 1.14,
-            "MUTHOOTFIN.NS": 1.11,
-            "KARURVYSYA.NS": 1.09,
-            "BEL.NS": 1.09,
-            "JUBLFOOD.NS": 1.09,
-            "JSWENERGY.NS": 1.02,
-            "POLYCAB.NS": 1.02,
-            "SAIL.NS": 1.02,
-            "CANBK.NS": 0.98,
-            "OIL.NS": 0.90,
-            "BALKRISIND.NS": 0.83,
-            "HINDPETRO.NS": 0.82,
-            "PRESTIGE.NS": 0.82,
-            "NAVINFLUOR.NS": 0.81,
-            "VODAFONEIDEA.NS": 0.77,
-            "BLUESTARCO.NS": 0.76,
-            "INDHOTEL.NS": 0.75,
-            "SCHAEFFLER.NS": 0.73,
-            "DIXON.NS": 0.69,
-            "TVSMOTOR.NS": 0.69,
-            "MANKIND.NS": 0.65,
-            "BHARTIHEXA.NS": 0.60,
-            "CGPOWER.NS": 0.60,
-            "BDL.NS": 0.49,
-            "TRITURBINE.NS": 0.48,
-            "360ONE.NS": 0.44,
-            "NATIONALUM.NS": 0.43,
-            "SUPREMEIND.NS": 0.43,
-            "DABUR.NS": 0.39,
-            "SWIGGY.NS": 0.38,
-            "ASTRAL.NS": 0.37,
-            "FSL.NS": 0.35
+            "POLICYBZR.NS": 1.36
         }
     },
 
@@ -159,30 +112,7 @@ funds = {
             "DABUR.NS": 1.65,
             "MPHASIS.NS": 1.62,
             "DELHIVERY.NS": 1.55,
-            "POLICYBZR.NS": 1.45,
-            "BHARATFORG.NS": 1.28,
-            "KARURVYSYA.NS": 1.23,
-            "STARHEALTH.NS": 1.14,
-            "NAM-INDIA.NS": 1.06,
-            "INDUSINDBK.NS": 1.04,
-            "ESCORTS.NS": 0.98,
-            "INDHOTEL.NS": 0.95,
-            "IGL.NS": 0.90,
-            "GODREJCP.NS": 0.84,
-            "CROMPTON.NS": 0.83,
-            "TIMKEN.NS": 0.80,
-            "CUB.NS": 0.73,
-            "ACC.NS": 0.71,
-            "REDINGTON.NS": 0.71,
-            "SONACOMS.NS": 0.65,
-            "SUPREMEIND.NS": 0.63,
-            "DIXON.NS": 0.61,
-            "AARTIIND.NS": 0.41,
-            "EMAMILTD.NS": 0.35,
-            "ARVIND.NS": 0.34,
-            "CEATLTD.NS": 0.29,
-            "ICICIGI.NS": 0.24,
-            "BHARTIHEXA.NS": 0.22
+            "POLICYBZR.NS": 1.45
         }
     },
 
@@ -208,16 +138,7 @@ funds = {
             "SWIGGY.NS": 2.47,
             "ICICIGI.NS": 2.28,
             "NYKAA.NS": 2.26,
-            "TORNTPOWER.NS": 2.02,
-            "ABB.NS": 1.75,
-            "DIXON.NS": 1.47,
-            "PHOENIXLTD.NS": 1.45,
-            "APARINDS.NS": 1.41,
-            "KIMS.NS": 1.10,
-            "TIMKEN.NS": 0.79,
-            "SONATSOFTW.NS": 0.32,
-            "VISHAL.NS": 0.27,
-            "TIINDIA.NS": 0.16
+            "TORNTPOWER.NS": 2.02
         }
     },
 
@@ -243,10 +164,7 @@ funds = {
             "LTF.NS": 2.61,
             "MAXHEALTH.NS": 2.23,
             "POLICYBZR.NS": 2.20,
-            "TVSMOTOR.NS": 2.08,
-            "IDFCFIRSTB.NS": 1.47,
-            "AXISBANK.NS": 1.24,
-            "AUBANK.NS": 1.01
+            "TVSMOTOR.NS": 2.08
         }
     },
 
@@ -272,54 +190,7 @@ funds = {
             "KPRMILL.NS": 1.90,
             "ESCORTS.NS": 1.82,
             "GODREJPROP.NS": 1.80,
-            "NAVINFLUOR.NS": 1.72,
-            "SRF.NS": 1.70,
-            "SCHAEFFLER.NS": 1.55,
-            "360ONE.NS": 1.55,
-            "BHARTIHEXA.NS": 1.51,
-            "SONACOMS.NS": 1.45,
-            "INDUSINDBK.NS": 1.39,
-            "SUPREMEIND.NS": 1.23,
-            "VEDL.NS": 1.22,
-            "NAUKRI.NS": 1.13,
-            "VOLTAS.NS": 1.12,
-            "DIXON.NS": 1.05,
-            "MOTHERSON.NS": 1.03,
-            "POLYCAB.NS": 1.03,
-            "OBEROIRLTY.NS": 1.00,
-            "ASTRAL.NS": 0.86,
-            "BLUESTARCO.NS": 0.82,
-            "NATIONALUM.NS": 0.74,
-            "DEEPAKNTR.NS": 0.73,
-            "SAIL.NS": 0.72,
-            "COROMANDEL.NS": 0.72,
-            "AMBUJACEM.NS": 0.72,
-            "UNOMINDA.NS": 0.68,
-            "BEML.NS": 0.66,
-            "PIIND.NS": 0.62,
-            "SUNDRMFAST.NS": 0.54,
-            "JYOTICNC.NS": 0.54,
-            "CROMPTON.NS": 0.49,
-            "IRCTC.NS": 0.48,
-            "AARTIIND.NS": 0.47,
-            "BANDHANBNK.NS": 0.46,
-            "SBICARD.NS": 0.44,
-            "IRB.NS": 0.40,
-            "FLUOROCHEM.NS": 0.37,
-            "ATUL.NS": 0.37,
-            "ACC.NS": 0.26,
-            "SYNGENE.NS": 0.26,
-            "PPLPHARMA.NS": 0.23,
-            "RATNAMANI.NS": 0.21,
-            "ENDURANCE.NS": 0.18,
-            "KIMS.NS": 0.18,
-            "THERMAX.NS": 0.16,
-            "HONAUT.NS": 0.14,
-            "CARBORUNIV.NS": 0.11,
-            "TORNTPOWER.NS": 0.11,
-            "INDIGO.NS": 0.11,
-            "JKCEMENT.NS": 0.10,
-            "HINDZINC.NS": 0.10
+            "NAVINFLUOR.NS": 1.72
         }
     }
 }
@@ -337,20 +208,24 @@ all_tickers = list(set(all_tickers))
 
 @st.cache_data(ttl=300)
 def fetch_data(tickers):
+
     data = yf.download(
         tickers=tickers,
         period="2d",
         interval="1d",
         auto_adjust=True,
         progress=False,
-        group_by='ticker'
+        group_by="ticker",
+        threads=True
     )
+
     return data
 
 try:
     data = fetch_data(all_tickers)
-except:
-    st.error("Error fetching market data")
+
+except Exception as e:
+    st.error(f"Error fetching market data: {e}")
     st.stop()
 
 # -----------------------------
@@ -358,7 +233,6 @@ except:
 # -----------------------------
 
 st.title("📈 Live Midcap Fund NAV Tracker")
-st.markdown("### Real-Time Expected NAV Estimation")
 
 current_time = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 st.write(f"Last Updated: {current_time}")
@@ -378,14 +252,20 @@ for fund_name, fund_data in funds.items():
     for ticker, weight in holdings.items():
 
         try:
+
             stock_data = data[ticker]
 
-            latest_close = stock_data['Close'].iloc[-1]
-            previous_close = stock_data['Close'].iloc[-2]
+            latest_close = stock_data["Close"].iloc[-1]
+            previous_close = stock_data["Close"].iloc[-2]
 
-            change_percent = ((latest_close - previous_close) / previous_close) * 100
+            change_percent = (
+                (latest_close - previous_close)
+                / previous_close
+            ) * 100
 
-            contribution = (weight / 100) * change_percent
+            contribution = (
+                weight / 100
+            ) * change_percent
 
             weighted_return += contribution
 
@@ -399,14 +279,14 @@ for fund_name, fund_data in funds.items():
         except:
             continue
 
-    expected_nav = previous_nav * (1 + weighted_return / 100)
+    expected_nav = previous_nav * (
+        1 + weighted_return / 100
+    )
 
-    nav_change = ((expected_nav - previous_nav) / previous_nav) * 100
-
-    if nav_change >= 0:
-        nav_color = "green"
-    else:
-        nav_color = "red"
+    nav_change = (
+        (expected_nav - previous_nav)
+        / previous_nav
+    ) * 100
 
     st.markdown("---")
 
@@ -434,58 +314,17 @@ for fund_name, fund_data in funds.items():
 
     if not df.empty:
 
-        top_positive = df.sort_values(
-            by="Contribution",
-            ascending=False
-        ).head(5)
-
-        top_negative = df.sort_values(
-            by="Contribution",
-            ascending=True
-        ).head(5)
-
-        c1, c2 = st.columns(2)
-
-        with c1:
-            st.markdown("#### Top Positive Contributors")
-            st.dataframe(top_positive, use_container_width=True)
-
-        with c2:
-            st.markdown("#### Top Negative Contributors")
-            st.dataframe(top_negative, use_container_width=True)
-
-        st.markdown("#### Full Portfolio Movement")
-
         st.dataframe(
-            df.sort_values(by="Contribution", ascending=False),
+            df.sort_values(
+                by="Contribution",
+                ascending=False
+            ),
             use_container_width=True,
             height=400
         )
 
 st.markdown("---")
-st.caption("Live NAV estimation based on weighted portfolio stock movement.")
-```
 
----
-
-# requirements.txt
-
-```text
-streamlit
-pandas
-yfinance
-streamlit-autorefresh
-numpy
-```
-
----
-
-# requirements.txt
-
-```text
-streamlit
-pandas
-yfinance
-streamlit-autorefresh
-numpy
-```
+st.caption(
+    "Live NAV estimation based on weighted portfolio stock movement."
+)
