@@ -9,48 +9,96 @@ st.set_page_config(
     layout="wide"
 )
 
-# AUTO REFRESH EVERY 5 MINUTES
 st_autorefresh(interval=300000, key="refresh")
 
-# -----------------------------
+# =========================
 # FUND DATA
-# -----------------------------
+# =========================
 
 funds = {
 
     "HSBC Midcap Fund": {
         "nav": 482.33,
         "holdings": {
-            "BSE.NS": 5.13,
-            "POWERINDIA.NS": 4.72,
-            "NYKAA.NS": 4.85,
-            "FEDERALBNK.NS": 3.86,
-            "PIRAMAL.NS": 3.51,
-            "POLICYBZR.NS": 3.43,
-            "BEL.NS": 3.01,
-            "INDIANB.NS": 2.66,
-            "BHEL.NS": 2.63,
-            "POLYCAB.NS": 2.60,
-            "LUPIN.NS": 2.12,
-            "RADICO.NS": 2.03,
-            "MCX.NS": 1.96,
-            "NAM-INDIA.NS": 1.90,
-            "OIL.NS": 1.45,
-            "BHARATFORG.NS": 1.32,
-            "ONGC.NS": 1.31,
-            "JSWENERGY.NS": 1.06,
-            "TATASTEEL.NS": 0.90,
-            "SHRIRAMFIN.NS": 0.83,
-            "DATAPATTNS.NS": 0.81,
-            "KEI.NS": 0.77,
-            "THERMAX.NS": 0.74,
-            "BHARTIHEXA.NS": 0.74,
-            "ABCAPITAL.NS": 0.74,
-            "HINDALCO.NS": 0.72,
-            "APLAPOLLO.NS": 0.65,
-            "JSWSTEEL.NS": 0.60,
-            "ECLERX.NS": 0.29,
-            "RBLBANK.NS": 0.10
+        "BSE.NS": 5.13,
+        "GVT&D.NS": 4.94,
+        "NYKAA.NS": 4.85,
+        "POWERINDIA.NS": 4.72,
+        "GROWW.NS": 3.88,
+        "FEDERALBNK.NS": 3.86,
+        "PIRAMAL.NS": 3.51,
+        "POLICYBZR.NS": 3.43,
+        "LENSKART.NS": 3.23,
+        "BEL.NS": 3.01,
+        "CPPLUS.NS": 2.99,
+        "INDIANB.NS": 2.66,
+        "BHEL.NS": 2.63,
+        "POLYCAB.NS": 2.60,
+        "ICICIAMC.NS": 2.22,
+        "LUPIN.NS": 2.12,
+        "RADICO.NS": 2.03,
+        "MCX.NS": 1.96,
+        "NAM-INDIA.NS": 1.90,
+        "NETWEB.NS": 1.87,
+        "GODFRYPHLP.NS": 1.86,
+        "CUB.NS": 1.86,
+        "APARINDS.NS": 1.85,
+        "KIRLOSENG.NS": 1.69,
+        "TDPOWERSYS.NS": 1.61,
+        "OIL.NS": 1.45,
+        "NTPCGREEN.NS": 1.45,
+        "BHARATFORG.NS": 1.32,
+        "ONGC.NS": 1.31,
+        "THYROCARE.NS": 1.31,
+        "IPCALAB.NS": 1.12,
+        "NATIONALUM.NS": 1.06,
+        "JSWENERGY.NS": 1.06,
+        "ATHERENERG.NS": 1.45,
+        "ATLANTAELE.NS": 0.98,
+        "KAYNES.NS": 0.98,
+        "MANKIND.NS": 0.95,
+        "TATASTEEL.NS": 0.90,
+        "SAFARI.NS": 0.85,
+        "SHRIRAMFIN.NS": 0.83,
+        "DATAPATTNS.NS": 0.81,
+        "KEI.NS": 0.77,
+        "THERMAX.NS": 0.74,
+        "BHARTIHEXA.NS": 0.74,
+        "ABCAPITAL.NS": 0.74,
+        "HINDALCO.NS": 0.72,
+        "AVALON.NS": 0.70,
+        "ANTHEM.NS": 0.67,
+        "APLAPOLLO.NS": 0.65,
+        "JSWSTEEL.NS": 0.60,
+        "SCHAEFFLER.NS": 0.47,
+        "SYNGENE.NS": 0.46,
+        "JINDALSTEL.NS": 0.46,
+        "ECLERX.NS": 0.29,
+        "GABRIEL.NS": 0.14,
+        "RBLBANK.NS": 0.10,
+        "BOSCHLTD.NS": 0.09,
+        "CRISIL.NS": 0.05,
+        "CUMMINSIND.NS": 0.05,
+        "MUTHOOTFIN.NS": 0.04,
+        "MAXFIN.NS": 0.04,
+        "IDFCFIRSTB.NS": 0.04,
+        "COFORGE.NS": 0.04,
+        "MAZDOCK.NS": 0.03,
+        "JKCEMENT.NS": 0.03,
+        "KPITTECH.NS": 0.03,
+        "DIXON.NS": 0.02,
+        "SWIGGY.NS": 0.02,
+        "INDHOTEL.NS": 0.02,
+        "GLOBALHEALTH.NS": 0.02,
+        "PERSISTENT.NS": 0.02,
+        "SUNDARMFIN.NS": 0.01,
+        "MSUMI.NS": 0.01,
+        "DIVISLAB.NS": 0.01,
+        "INDIGO.NS": 0.01,
+        "MAXHEALTH.NS": 0.01,
+        "CGPOWER.NS": 0.01,
+        "BIOCON.NS": 0.01,
+        "ASHOKLEY.NS": 0.01
         }
     },
 
@@ -86,7 +134,34 @@ funds = {
             "JSL.NS": 1.38,
             "KEI.NS": 1.37,
             "MAXFIN.NS": 1.37,
-            "POLICYBZR.NS": 1.36
+            "POLICYBZR.NS": 1.36,
+            "ASHOKLEY.NS": 1.35,
+            "IPCALAB.NS": 1.32,
+            "MAXHEALTH.NS": 1.31,
+            "SUNDARMFIN.NS": 1.22,
+            "PHOENIXLTD.NS": 1.14,
+            "MUTHOOTFIN.NS": 1.11,
+            "KARURVYSYA.NS": 1.09,
+            "BEL.NS": 1.09,
+            "JUBLFOOD.NS": 1.09,
+            "JSWENERGY.NS": 1.02,
+            "POLYCAB.NS": 1.02,
+            "SAIL.NS": 1.02,
+            "CANBK.NS": 0.98,
+            "OIL.NS": 0.90,
+            "BALKRISIND.NS": 0.83,
+            "HINDPETRO.NS": 0.82,
+            "PRESTIGE.NS": 0.82,
+            "NAVINFLUOR.NS": 0.81,
+            "VODAFONEIDEA.NS": 0.77,
+            "BLUESTARCO.NS": 0.76,
+            "INDHOTEL.NS": 0.75,
+            "SCHAEFFLER.NS": 0.73,
+            "DIXON.NS": 0.69,
+            "TVSMOTOR.NS": 0.69,
+            "MANKIND.NS": 0.65,
+            "BHARTIHEXA.NS": 0.60,
+            "CGPOWER.NS": 0.60
         }
     },
 
@@ -112,7 +187,24 @@ funds = {
             "DABUR.NS": 1.65,
             "MPHASIS.NS": 1.62,
             "DELHIVERY.NS": 1.55,
-            "POLICYBZR.NS": 1.45
+            "POLICYBZR.NS": 1.45,
+            "BHARATFORG.NS": 1.28,
+            "KARURVYSYA.NS": 1.23,
+            "STARHEALTH.NS": 1.14,
+            "NAM-INDIA.NS": 1.06,
+            "INDUSINDBK.NS": 1.04,
+            "ESCORTS.NS": 0.98,
+            "INDHOTEL.NS": 0.95,
+            "IGL.NS": 0.90,
+            "GODREJCP.NS": 0.84,
+            "CROMPTON.NS": 0.83,
+            "TIMKEN.NS": 0.80,
+            "CUB.NS": 0.73,
+            "ACC.NS": 0.71,
+            "REDINGTON.NS": 0.71,
+            "SONACOMS.NS": 0.65,
+            "SUPREMEIND.NS": 0.63,
+            "DIXON.NS": 0.61
         }
     },
 
@@ -135,10 +227,13 @@ funds = {
             "AMBER.NS": 2.79,
             "TRENT.NS": 2.70,
             "SRF.NS": 2.58,
-            "SWIGGY.NS": 2.47,
             "ICICIGI.NS": 2.28,
             "NYKAA.NS": 2.26,
-            "TORNTPOWER.NS": 2.02
+            "TORNTPOWER.NS": 2.02,
+            "ABB.NS": 1.75,
+            "DIXON.NS": 1.47,
+            "PHOENIXLTD.NS": 1.45,
+            "APARINDS.NS": 1.41
         }
     },
 
@@ -164,40 +259,19 @@ funds = {
             "LTF.NS": 2.61,
             "MAXHEALTH.NS": 2.23,
             "POLICYBZR.NS": 2.20,
-            "TVSMOTOR.NS": 2.08
-        }
-    },
-
-    "ICICI Prudential Midcap Fund": {
-        "nav": 370.22,
-        "holdings": {
-            "MCX.NS": 4.88,
-            "BSE.NS": 4.87,
-            "JSL.NS": 4.51,
-            "APARINDS.NS": 4.30,
-            "MUTHOOTFIN.NS": 3.74,
-            "APLAPOLLO.NS": 3.59,
-            "JINDALSTEL.NS": 3.15,
-            "HINDPETRO.NS": 3.14,
-            "POLICYBZR.NS": 3.11,
-            "UPL.NS": 2.94,
-            "BHARATFORG.NS": 2.93,
-            "KEI.NS": 2.69,
-            "PRESTIGE.NS": 2.65,
-            "NAM-INDIA.NS": 2.20,
-            "CUMMINSIND.NS": 2.07,
-            "POWERINDIA.NS": 2.05,
-            "KPRMILL.NS": 1.90,
-            "ESCORTS.NS": 1.82,
-            "GODREJPROP.NS": 1.80,
-            "NAVINFLUOR.NS": 1.72
+            "TVSMOTOR.NS": 2.08,
+            "HDFCAMC.NS": 1.96,
+            "IDFCFIRSTB.NS": 1.47,
+            "AXISBANK.NS": 1.24,
+            "WAAREEENER.NS": 1.04,
+            "AUBANK.NS": 1.01
         }
     }
 }
 
-# -----------------------------
-# FETCH STOCK DATA
-# -----------------------------
+# =========================
+# FETCH DATA
+# =========================
 
 all_tickers = []
 
@@ -225,21 +299,21 @@ try:
     data = fetch_data(all_tickers)
 
 except Exception as e:
-    st.error(f"Error fetching market data: {e}")
+    st.error(f"Error fetching data: {e}")
     st.stop()
 
-# -----------------------------
+# =========================
 # TITLE
-# -----------------------------
+# =========================
 
 st.title("📈 Live Midcap Fund NAV Tracker")
 
 current_time = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 st.write(f"Last Updated: {current_time}")
 
-# -----------------------------
+# =========================
 # NAV CALCULATION
-# -----------------------------
+# =========================
 
 for fund_name, fund_data in funds.items():
 
