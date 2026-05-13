@@ -357,9 +357,14 @@ except Exception as e:
 
 st.title("📈 Live Midcap Fund NAV Tracker")
 
-current_time = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-st.write(f"Last Updated: {current_time}")
+from datetime import datetime
+import pytz
 
+india = pytz.timezone("Asia/Kolkata")
+
+current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
+
+st.write(f"Last Updated: {current_time}")
 # =========================
 # NAV CALCULATION
 # =========================
