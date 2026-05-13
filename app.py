@@ -297,7 +297,7 @@ funds = {
            "GROWW.NS": 5.09,
            "BHARTIARTL.NS": 5.01,
            "MCX.NS": 4.33,
-           "BSE": 3.83,
+           "BSE.NS": 3.83,
            "DIXON.NS": 3.54,
            "TIINDIA.NS": 3.51,
            "BHARTIHEXA.NS": 3.18,
