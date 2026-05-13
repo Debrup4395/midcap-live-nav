@@ -594,7 +594,8 @@ for fund_name, fund_data in funds.items():
             df,
             use_container_width=True,
             height=400
-        )
+        
+        fund_performance = []
 # =====================================================
 # BEST & WORST FUND
 # =====================================================
