@@ -200,6 +200,7 @@ funds = {
             "AUBANK.NS": 4.24,
             "FEDERALBNK.NS": 3.87,
             "GLENMARK.NS": 3.41,
+            "MFSL.NS": 4.37,
             "INDIANB.NS": 3.31,
             "BALKRISIND.NS": 3.25,
             "FORTIS.NS": 3.16,
