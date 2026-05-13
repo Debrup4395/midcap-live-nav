@@ -587,7 +587,7 @@ for fund_name, fund_data in funds.items():
         except:
             continue
 
-     expected_nav = previous_nav * (
+         expected_nav = previous_nav * (
         1 + weighted_return / 100
     )
 
@@ -600,6 +600,7 @@ for fund_name, fund_data in funds.items():
         "Fund": fund_name,
         "Return": float(nav_change)
     })
+
     st.markdown("---")
 
     st.subheader(fund_name)
@@ -621,7 +622,6 @@ for fund_name, fund_data in funds.items():
         "Portfolio Move",
         f"{weighted_return:.2f}%"
     )
-
     df = pd.DataFrame(stock_rows)
 
     if not df.empty:
