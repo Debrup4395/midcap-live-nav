@@ -497,7 +497,7 @@ st.write(f"Last Updated: {current_time}")
 # =====================================================
 
 st.markdown("---")
-
+fund_performance = []
 if len(fund_performance) > 0:
 
     performance_df = pd.DataFrame(fund_performance)
