@@ -492,45 +492,53 @@ india = pytz.timezone("Asia/Kolkata")
 current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
 
 st.write(f"Last Updated: {current_time}")
+performance_placeholder = st.empty()
+# =====================================================
+# PERFORMANCE TRACKER
+# =====================================================
+
+fund_performance = []
 # =====================================================
 # BEST & WORST FUND
 # =====================================================
 
-st.markdown("---")
-fund_performance = []
-if len(fund_performance) > 0:
+with performance_placeholder.container():
 
-    performance_df = pd.DataFrame(fund_performance)
+    if len(fund_performance) > 0:
 
-    best_fund = performance_df.loc[
-        performance_df["Return"].idxmax()
-    ]
+        performance_df = pd.DataFrame(fund_performance)
 
-    worst_fund = performance_df.loc[
-        performance_df["Return"].idxmin()
-    ]
+        best_fund = performance_df.loc[
+            performance_df["Return"].idxmax()
+        ]
 
-    st.subheader("🏆 Fund Performance Today")
+        worst_fund = performance_df.loc[
+            performance_df["Return"].idxmin()
+        ]
 
-    c1, c2 = st.columns(2)
+        st.markdown("---")
 
-    c1.metric(
-        "Best Fund of the Day",
-        best_fund["Fund"],
-        f"{best_fund['Return']:.2f}%"
-    )
+        st.subheader("🏆 Fund Performance Today")
+
+        c1, c2 = st.columns(2)
+
+        c1.metric(
+            "Best Fund of the Day",
+            best_fund["Fund"],
+            f"{best_fund['Return']:.2f}%"
+        )
+
+        c2.metric(
+            "Worst Fund of the Day",
+            worst_fund["Fund"],
+            f"{worst_fund['Return']:.2f}%"
+        )
 
     c2.metric(
         "Worst Fund of the Day",
         worst_fund["Fund"],
         f"{worst_fund['Return']:.2f}%"
     )
-
-# =====================================================
-# PERFORMANCE TRACKER
-# =====================================================
-
-fund_performance = []
 
 
 # =========================
