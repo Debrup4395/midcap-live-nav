@@ -607,14 +607,29 @@ if len(fund_performance) > 0:
 
     performance_df = pd.DataFrame(fund_performance)
 
-    if "Return" in performance_df.columns:
+    best_fund = performance_df.loc[
+        performance_df["Return"].idxmax()
+    ]
 
-        best_fund = performance_df.sort_values(
-            by="Return",
-            ascending=False
-        ).iloc[0]
+    worst_fund = performance_df.loc[
+        performance_df["Return"].idxmin()
+    ]
 
-        worst_fund = performance_df
+    st.subheader("🏆 Fund Performance Today")
+
+    c1, c2 = st.columns(2)
+
+    c1.metric(
+        "Best Fund of the Day",
+        best_fund["Fund"],
+        f"{best_fund['Return']:.2f}%"
+    )
+
+    c2.metric(
+        "Worst Fund of the Day",
+        worst_fund["Fund"],
+        f"{worst_fund['Return']:.2f}%"
+    )
 
 # =====================================================
 # FOOTER
