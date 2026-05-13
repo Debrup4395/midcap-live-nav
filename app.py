@@ -295,7 +295,7 @@ funds = {
            "PERSISTENT.NS": 5.41,
            "ABCAPITAL.NS": 5.17,
            "GROWW.NS": 5.09,
-           "BHARTIARTL.NS", 5.01,
+           "BHARTIARTL.NS": 5.01,
            "MCX.NS": 4.33,
            "BSE": 3.83,
            "DIXON.NS": 3.54,
