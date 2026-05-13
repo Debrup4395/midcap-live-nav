@@ -246,7 +246,7 @@ for fund_name, fund_data in funds.items():
     previous_nav = fund_data["nav"]
     holdings = fund_data["holdings"]
 
-    weighted_return = 0
+    weighted_return = 0.0
     stock_rows = []
 
     for ticker, weight in holdings.items():
@@ -255,19 +255,25 @@ for fund_name, fund_data in funds.items():
 
             stock_data = data[ticker]
 
-          latest_close = float(stock_data["Close"].iloc[-1])
-previous_close = float(stock_data["Close"].iloc[-2])
+            latest_close = float(
+                stock_data["Close"].iloc[-1]
+            )
 
-if previous_close == 0:
-    continue
+            previous_close = float(
+                stock_data["Close"].iloc[-2]
+            )
 
-change_percent = (
-    (latest_close - previous_close)
-    / previous_close
-) * 100
+            if previous_close == 0:
+                continue
 
-if pd.isna(change_percent):
-    continue
+            change_percent = (
+                (latest_close - previous_close)
+                / previous_close
+            ) * 100
+
+            if pd.isna(change_percent):
+                continue
+
             contribution = (
                 weight / 100
             ) * change_percent
@@ -317,18 +323,18 @@ if pd.isna(change_percent):
 
     df = pd.DataFrame(stock_rows)
 
-if not df.empty:
+    if not df.empty:
 
-    df = df.sort_values(
-        by="Weight %",
-        ascending=False
-    )
+        df = df.sort_values(
+            by="Weight %",
+            ascending=False
+        )
 
-    st.dataframe(
-        df,
-        use_container_width=True,
-        height=400
-    )
+        st.dataframe(
+            df,
+            use_container_width=True,
+            height=400
+        )
 
 st.markdown("---")
 
