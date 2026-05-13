@@ -603,33 +603,18 @@ for fund_name, fund_data in funds.items():
 
 st.markdown("---")
 
-performance_df = pd.DataFrame(fund_performance)
+if len(fund_performance) > 0:
 
-best_fund = performance_df.sort_values(
-    by="Return",
-    ascending=False
-).iloc[0]
+    performance_df = pd.DataFrame(fund_performance)
 
-worst_fund = performance_df.sort_values(
-    by="Return",
-    ascending=True
-).iloc[0]
+    if "Return" in performance_df.columns:
 
-st.subheader("🏆 Fund Performance Today")
+        best_fund = performance_df.sort_values(
+            by="Return",
+            ascending=False
+        ).iloc[0]
 
-c1, c2 = st.columns(2)
-
-c1.metric(
-    "Best Fund of the Day",
-    best_fund["Fund"],
-    f"{best_fund['Return']:.2f}%"
-)
-
-c2.metric(
-    "Worst Fund of the Day",
-    worst_fund["Fund"],
-    f"{worst_fund['Return']:.2f}%"
-)
+        worst_fund = performance_df
 
 # =====================================================
 # FOOTER
