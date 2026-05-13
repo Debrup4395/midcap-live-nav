@@ -520,26 +520,19 @@ with performance_placeholder.container():
 
         st.subheader("🏆 Fund Performance Today")
 
-        c1, c2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-        c1.metric(
+        col1.metric(
             "Best Fund of the Day",
             best_fund["Fund"],
             f"{best_fund['Return']:.2f}%"
         )
 
-        c2.metric(
+        col2.metric(
             "Worst Fund of the Day",
             worst_fund["Fund"],
             f"{worst_fund['Return']:.2f}%"
         )
-
-    c2.metric(
-        "Worst Fund of the Day",
-        worst_fund["Fund"],
-        f"{worst_fund['Return']:.2f}%"
-    )
-
 
 # =========================
 # NAV CALCULATION
