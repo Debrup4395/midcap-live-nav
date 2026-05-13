@@ -587,55 +587,56 @@ for fund_name, fund_data in funds.items():
         except:
             continue
 
-         expected_nav = previous_nav * (
-        1 + weighted_return / 100
-    )
-
-    nav_change = (
-        (expected_nav - previous_nav)
-        / previous_nav
-    ) * 100
-
-    fund_performance.append({
-        "Fund": fund_name,
-        "Return": float(nav_change)
-    })
-
-    st.markdown("---")
-
-    st.subheader(fund_name)
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric(
-        "Previous NAV",
-        f"₹{previous_nav:.2f}"
-    )
-
-    col2.metric(
-        "Expected NAV",
-        f"₹{expected_nav:.2f}",
-        f"{nav_change:.2f}%"
-    )
-
-    col3.metric(
-        "Portfolio Move",
-        f"{weighted_return:.2f}%"
-    )
-    df = pd.DataFrame(stock_rows)
-
-    if not df.empty:
-
-        df = df.sort_values(
-            by="Weight %",
-            ascending=False
+               expected_nav = previous_nav * (
+            1 + weighted_return / 100
         )
 
-        st.dataframe(
-            df,
-            use_container_width=True,
-            height=400
+        nav_change = (
+            (expected_nav - previous_nav)
+            / previous_nav
+        ) * 100
+
+        fund_performance.append({
+            "Fund": fund_name,
+            "Return": float(nav_change)
+        })
+
+        st.markdown("---")
+
+        st.subheader(fund_name)
+
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric(
+            "Previous NAV",
+            f"₹{previous_nav:.2f}"
         )
+
+        col2.metric(
+            "Expected NAV",
+            f"₹{expected_nav:.2f}",
+            f"{nav_change:.2f}%"
+        )
+
+        col3.metric(
+            "Portfolio Move",
+            f"{weighted_return:.2f}%"
+        )
+
+        df = pd.DataFrame(stock_rows)
+
+        if not df.empty:
+
+            df = df.sort_values(
+                by="Weight %",
+                ascending=False
+            )
+
+            st.dataframe(
+                df,
+                use_container_width=True,
+                height=400
+            )
 
 # =====================================================
 # FOOTER
