@@ -483,26 +483,12 @@ numpy
 
 ---
 
-# HOW TO UPLOAD IN GITHUB
+# requirements.txt
 
-1. Open your GitHub repository
-2. Open app.py
-3. Paste full app.py code
-4. Commit changes
-5. Open requirements.txt
-6. Paste requirements code
-7. Commit changes
-
----
-
-# HOW TO DEPLOY
-
-1. Open [https://share.streamlit.io/](https://share.streamlit.io/)
-2. Login with GitHub
-3. Click New App
-4. Select repository → midcap-live-nav
-5. Branch → main
-6. Main file path → app.py
-7. Click Deploy
-
-Your website will become live in 1-2 minutes.
+```text
+streamlit
+pandas
+yfinance
+streamlit-autorefresh
+numpy
+```
