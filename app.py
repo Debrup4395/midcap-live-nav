@@ -544,7 +544,7 @@ for fund_name, fund_data in funds.items():
 
         except:
             continue
-
+    fund_performance = []
     expected_nav = previous_nav * (
         1 + weighted_return / 100
     )
