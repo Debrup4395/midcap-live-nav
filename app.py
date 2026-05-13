@@ -495,7 +495,7 @@ st.write(f"Last Updated: {current_time}")
 # =========================
 # NAV CALCULATION
 # =========================
-
+fund_performance = []
 for fund_name, fund_data in funds.items():
 
     previous_nav = fund_data["nav"]
