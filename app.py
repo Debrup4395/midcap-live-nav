@@ -312,16 +312,18 @@ for fund_name, fund_data in funds.items():
 
     df = pd.DataFrame(stock_rows)
 
-    if not df.empty:
+if not df.empty:
 
-        st.dataframe(
-            df.sort_values(
-                by="Contribution",
-                ascending=False
-            ),
-            use_container_width=True,
-            height=400
-        )
+    df = df.sort_values(
+        by="Weight %",
+        ascending=False
+    )
+
+    st.dataframe(
+        df,
+        use_container_width=True,
+        height=400
+    )
 
 st.markdown("---")
 
