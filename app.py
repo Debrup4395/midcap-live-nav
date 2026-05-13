@@ -255,14 +255,19 @@ for fund_name, fund_data in funds.items():
 
             stock_data = data[ticker]
 
-            latest_close = stock_data["Close"].iloc[-1]
-            previous_close = stock_data["Close"].iloc[-2]
+          latest_close = float(stock_data["Close"].iloc[-1])
+previous_close = float(stock_data["Close"].iloc[-2])
 
-            change_percent = (
-                (latest_close - previous_close)
-                / previous_close
-            ) * 100
+if previous_close == 0:
+    continue
 
+change_percent = (
+    (latest_close - previous_close)
+    / previous_close
+) * 100
+
+if pd.isna(change_percent):
+    continue
             contribution = (
                 weight / 100
             ) * change_percent
