@@ -552,19 +552,19 @@ for fund_name, fund_data in funds.items():
         except:
             continue
 
-    expected_nav = previous_nav * (
+        expected_nav = previous_nav * (
         1 + weighted_return / 100
     )
 
-   nav_change = (
-    (expected_nav - previous_nav)
-    / previous_nav
-) * 100
+    nav_change = (
+        (expected_nav - previous_nav)
+        / previous_nav
+    ) * 100
 
-fund_performance.append({
-    "Fund": fund_name,
-    "Return": float(nav_change)
-})
+    fund_performance.append({
+        "Fund": fund_name,
+        "Return": float(nav_change)
+    })
     st.markdown("---")
 
     st.subheader(fund_name)
