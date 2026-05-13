@@ -250,7 +250,7 @@ funds = {
             "INDUSINDBK.NS": 4.02,
             "LTF.NS": 4.01,
             "GLENMARK.NS": 3.81,
-            "MAXFIN.NS": 3.58,
+            "MFSL.NS": 3.58,
             "JKCEMENT.NS": 3.50,
             "SAILIFE.NS": 3.11,
             "AMBER.NS": 2.79,
