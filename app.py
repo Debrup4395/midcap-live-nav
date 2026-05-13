@@ -196,7 +196,7 @@ funds = {
     "HDFC Mid Cap Fund": {
         "nav": 216.62,
         "holdings": {
-            "MAXFIN.NS": 4.37,
+            "MFSL.NS": 4.37,
             "AUBANK.NS": 4.24,
             "FEDERALBNK.NS": 3.87,
             "GLENMARK.NS": 3.41,
