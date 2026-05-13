@@ -1,3 +1,6 @@
+# app.py
+
+```python
 import streamlit as st
 import yfinance as yf
 import pandas as pd
@@ -17,11 +20,11 @@ st_autorefresh(interval=300000, key="refresh")
 # -----------------------------
 
 funds = {
-
     "HSBC Midcap Fund": {
         "nav": 482.33,
         "holdings": {
             "BSE.NS": 5.13,
+            "POWERINDIA.NS": 4.94,
             "NYKAA.NS": 4.85,
             "POWERINDIA.NS": 4.72,
             "FEDERALBNK.NS": 3.86,
@@ -132,16 +135,101 @@ funds = {
             "SUPREMEIND.NS": 0.43,
             "DABUR.NS": 0.39,
             "SWIGGY.NS": 0.38,
-            "ASTRAL.NS": 0.37
+            "ASTRAL.NS": 0.37,
+            "FSL.NS": 0.35
+        }
+    },
+
+    "HDFC Mid Cap Fund": {
+        "nav": 216.62,
+        "holdings": {
+            "MAXFIN.NS": 4.37,
+            "AUBANK.NS": 4.24,
+            "FEDERALBNK.NS": 3.87,
+            "GLENMARK.NS": 3.41,
+            "INDIANB.NS": 3.31,
+            "BALKRISIND.NS": 3.25,
+            "FORTIS.NS": 3.16,
+            "IPCALAB.NS": 2.92,
+            "CUMMINSIND.NS": 2.50,
+            "MARICO.NS": 2.48,
+            "HINDPETRO.NS": 2.20,
+            "M_MFIN.NS": 2.05,
+            "COFORGE.NS": 1.97,
+            "AUROPHARMA.NS": 1.96,
+            "TATACOMM.NS": 1.86,
+            "PERSISTENT.NS": 1.70,
+            "DABUR.NS": 1.65,
+            "MPHASIS.NS": 1.62,
+            "DELHIVERY.NS": 1.55,
+            "POLICYBZR.NS": 1.45,
+            "BHARATFORG.NS": 1.28,
+            "KARURVYSYA.NS": 1.23,
+            "STARHEALTH.NS": 1.14,
+            "NAM-INDIA.NS": 1.06,
+            "INDUSINDBK.NS": 1.04,
+            "ESCORTS.NS": 0.98,
+            "INDHOTEL.NS": 0.95,
+            "IGL.NS": 0.90,
+            "GODREJCP.NS": 0.84,
+            "CROMPTON.NS": 0.83,
+            "TIMKEN.NS": 0.80,
+            "CUB.NS": 0.73,
+            "ACC.NS": 0.71,
+            "REDINGTON.NS": 0.71,
+            "SONACOMS.NS": 0.65,
+            "SUPREMEIND.NS": 0.63,
+            "DIXON.NS": 0.61,
+            "AARTIIND.NS": 0.41,
+            "EMAMILTD.NS": 0.35,
+            "ARVIND.NS": 0.34,
+            "CEATLTD.NS": 0.29,
+            "ICICIGI.NS": 0.24,
+            "BHARTIHEXA.NS": 0.22
+        }
+    },
+
+    "Invesco India Midcap Fund": {
+        "nav": 218.21,
+        "holdings": {
+            "PRESTIGE.NS": 6.19,
+            "BSE.NS": 5.88,
+            "FEDERALBNK.NS": 5.44,
+            "AUBANK.NS": 5.13,
+            "ZOMATO.NS": 4.49,
+            "MAXHEALTH.NS": 4.42,
+            "GLOBALHEALTH.NS": 4.35,
+            "INDIGO.NS": 4.14,
+            "INDUSINDBK.NS": 4.02,
+            "LTF.NS": 4.01,
+            "GLENMARK.NS": 3.81,
+            "MAXFIN.NS": 3.58,
+            "JKCEMENT.NS": 3.50,
+            "AMBER.NS": 2.79,
+            "TRENT.NS": 2.70,
+            "SRF.NS": 2.58,
+            "SWIGGY.NS": 2.47,
+            "ICICIGI.NS": 2.28,
+            "NYKAA.NS": 2.26,
+            "TORNTPOWER.NS": 2.02,
+            "ABB.NS": 1.75,
+            "DIXON.NS": 1.47,
+            "PHOENIXLTD.NS": 1.45,
+            "APARINDS.NS": 1.41,
+            "KIMS.NS": 1.10,
+            "TIMKEN.NS": 0.79,
+            "SONATSOFTW.NS": 0.32,
+            "VISHAL.NS": 0.27,
+            "TIINDIA.NS": 0.16
         }
     },
 
     "Motilal Oswal Midcap Fund": {
         "nav": 103.52,
         "holdings": {
-            "PAYTM.NS": 7.29,
+            "ONE97.NS": 7.29,
             "KALYANKJIL.NS": 7.09,
-            "ETERNAL.NS": 5.83,
+            "ZOMATO.NS": 5.83,
             "COFORGE.NS": 5.58,
             "KEI.NS": 5.48,
             "PERSISTENT.NS": 5.41,
@@ -163,6 +251,79 @@ funds = {
             "AXISBANK.NS": 1.24,
             "AUBANK.NS": 1.01
         }
+    },
+
+    "ICICI Prudential Midcap Fund": {
+        "nav": 370.22,
+        "holdings": {
+            "MCX.NS": 4.88,
+            "BSE.NS": 4.87,
+            "JSL.NS": 4.51,
+            "APARINDS.NS": 4.30,
+            "MUTHOOTFIN.NS": 3.74,
+            "APLAPOLLO.NS": 3.59,
+            "JINDALSTEL.NS": 3.15,
+            "HINDPETRO.NS": 3.14,
+            "POLICYBZR.NS": 3.11,
+            "UPL.NS": 2.94,
+            "BHARATFORG.NS": 2.93,
+            "KEI.NS": 2.69,
+            "PRESTIGE.NS": 2.65,
+            "NAM-INDIA.NS": 2.20,
+            "CUMMINSIND.NS": 2.07,
+            "POWERINDIA.NS": 2.05,
+            "KPRMILL.NS": 1.90,
+            "ESCORTS.NS": 1.82,
+            "GODREJPROP.NS": 1.80,
+            "NAVINFLUOR.NS": 1.72,
+            "SRF.NS": 1.70,
+            "SCHAEFFLER.NS": 1.55,
+            "360ONE.NS": 1.55,
+            "BHARTIHEXA.NS": 1.51,
+            "SONACOMS.NS": 1.45,
+            "INDUSINDBK.NS": 1.39,
+            "SUPREMEIND.NS": 1.23,
+            "VEDL.NS": 1.22,
+            "NAUKRI.NS": 1.13,
+            "VOLTAS.NS": 1.12,
+            "DIXON.NS": 1.05,
+            "MOTHERSON.NS": 1.03,
+            "POLYCAB.NS": 1.03,
+            "OBEROIRLTY.NS": 1.00,
+            "ASTRAL.NS": 0.86,
+            "BLUESTARCO.NS": 0.82,
+            "NATIONALUM.NS": 0.74,
+            "DEEPAKNTR.NS": 0.73,
+            "SAIL.NS": 0.72,
+            "COROMANDEL.NS": 0.72,
+            "AMBUJACEM.NS": 0.72,
+            "UNOMINDA.NS": 0.68,
+            "BEML.NS": 0.66,
+            "PIIND.NS": 0.62,
+            "SUNDRMFAST.NS": 0.54,
+            "JYOTICNC.NS": 0.54,
+            "CROMPTON.NS": 0.49,
+            "IRCTC.NS": 0.48,
+            "AARTIIND.NS": 0.47,
+            "BANDHANBNK.NS": 0.46,
+            "SBICARD.NS": 0.44,
+            "IRB.NS": 0.40,
+            "FLUOROCHEM.NS": 0.37,
+            "ATUL.NS": 0.37,
+            "ACC.NS": 0.26,
+            "SYNGENE.NS": 0.26,
+            "PPLPHARMA.NS": 0.23,
+            "RATNAMANI.NS": 0.21,
+            "ENDURANCE.NS": 0.18,
+            "KIMS.NS": 0.18,
+            "THERMAX.NS": 0.16,
+            "HONAUT.NS": 0.14,
+            "CARBORUNIV.NS": 0.11,
+            "TORNTPOWER.NS": 0.11,
+            "INDIGO.NS": 0.11,
+            "JKCEMENT.NS": 0.10,
+            "HINDZINC.NS": 0.10
+        }
     }
 }
 
@@ -179,24 +340,20 @@ all_tickers = list(set(all_tickers))
 
 @st.cache_data(ttl=300)
 def fetch_data(tickers):
-
     data = yf.download(
         tickers=tickers,
         period="2d",
         interval="1d",
         auto_adjust=True,
         progress=False,
-        group_by="ticker",
-        threads=True
+        group_by='ticker'
     )
-
     return data
 
 try:
     data = fetch_data(all_tickers)
-
-except Exception as e:
-    st.error(f"Error fetching market data: {e}")
+except:
+    st.error("Error fetching market data")
     st.stop()
 
 # -----------------------------
@@ -226,17 +383,12 @@ for fund_name, fund_data in funds.items():
         try:
             stock_data = data[ticker]
 
-            latest_close = stock_data["Close"].iloc[-1]
-            previous_close = stock_data["Close"].iloc[-2]
+            latest_close = stock_data['Close'].iloc[-1]
+            previous_close = stock_data['Close'].iloc[-2]
 
-            change_percent = (
-                (latest_close - previous_close)
-                / previous_close
-            ) * 100
+            change_percent = ((latest_close - previous_close) / previous_close) * 100
 
-            contribution = (
-                weight / 100
-            ) * change_percent
+            contribution = (weight / 100) * change_percent
 
             weighted_return += contribution
 
@@ -250,14 +402,14 @@ for fund_name, fund_data in funds.items():
         except:
             continue
 
-    expected_nav = previous_nav * (
-        1 + weighted_return / 100
-    )
+    expected_nav = previous_nav * (1 + weighted_return / 100)
 
-    nav_change = (
-        (expected_nav - previous_nav)
-        / previous_nav
-    ) * 100
+    nav_change = ((expected_nav - previous_nav) / previous_nav) * 100
+
+    if nav_change >= 0:
+        nav_color = "green"
+    else:
+        nav_color = "red"
 
     st.markdown("---")
 
@@ -299,31 +451,44 @@ for fund_name, fund_data in funds.items():
 
         with c1:
             st.markdown("#### Top Positive Contributors")
-            st.dataframe(
-                top_positive,
-                use_container_width=True
-            )
+            st.dataframe(top_positive, use_container_width=True)
 
         with c2:
             st.markdown("#### Top Negative Contributors")
-            st.dataframe(
-                top_negative,
-                use_container_width=True
-            )
+            st.dataframe(top_negative, use_container_width=True)
 
         st.markdown("#### Full Portfolio Movement")
 
         st.dataframe(
-            df.sort_values(
-                by="Contribution",
-                ascending=False
-            ),
+            df.sort_values(by="Contribution", ascending=False),
             use_container_width=True,
             height=400
         )
 
 st.markdown("---")
+st.caption("Live NAV estimation based on weighted portfolio stock movement.")
+```
 
-st.caption(
-    "Live NAV estimation based on weighted portfolio stock movement."
-)
+---
+
+# requirements.txt
+
+```text
+streamlit
+pandas
+yfinance
+streamlit-autorefresh
+numpy
+```
+
+---
+
+# requirements.txt
+
+```text
+streamlit
+pandas
+yfinance
+streamlit-autorefresh
+numpy
+```
