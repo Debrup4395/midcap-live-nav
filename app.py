@@ -590,6 +590,43 @@ for fund_name, fund_data in funds.items():
             use_container_width=True,
             height=400
         )
+# =====================================================
+# BEST & WORST FUND
+# =====================================================
+
+st.markdown("---")
+
+performance_df = pd.DataFrame(fund_performance)
+
+best_fund = performance_df.sort_values(
+    by="Return",
+    ascending=False
+).iloc[0]
+
+worst_fund = performance_df.sort_values(
+    by="Return",
+    ascending=True
+).iloc[0]
+
+st.subheader("🏆 Fund Performance Today")
+
+c1, c2 = st.columns(2)
+
+c1.metric(
+    "Best Fund of the Day",
+    best_fund["Fund"],
+    f"{best_fund['Return']:.2f}%"
+)
+
+c2.metric(
+    "Worst Fund of the Day",
+    worst_fund["Fund"],
+    f"{worst_fund['Return']:.2f}%"
+)
+
+# =====================================================
+# FOOTER
+# =====================================================
 
 st.markdown("---")
 
