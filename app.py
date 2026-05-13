@@ -492,6 +492,13 @@ india = pytz.timezone("Asia/Kolkata")
 current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
 
 st.write(f"Last Updated: {current_time}")
+# =====================================================
+# PERFORMANCE TRACKER
+# =====================================================
+
+fund_performance = []
+
+
 # =========================
 # NAV CALCULATION
 # =========================
