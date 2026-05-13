@@ -544,7 +544,6 @@ for fund_name, fund_data in funds.items():
 
         except:
             continue
-    fund_performance = []
     expected_nav = previous_nav * (
         1 + weighted_return / 100
     )
@@ -594,7 +593,6 @@ for fund_name, fund_data in funds.items():
             use_container_width=True,
             height=400
         )
-        fund_performance = []
 # =====================================================
 # BEST & WORST FUND
 # =====================================================
