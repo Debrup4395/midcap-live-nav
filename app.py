@@ -558,7 +558,6 @@ for fund_name, fund_data in funds.items():
         "Fund": fund_name,
         "Return": float(nav_change)
     })
-
     st.markdown("---")
 
     st.subheader(fund_name)
