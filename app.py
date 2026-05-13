@@ -311,7 +311,7 @@ funds = {
            "ICICIPRULI.NS": 1.96,
            "IDFCFIRSTB.NS": 1.47,
            "PREMIERENE.NS": 1.25,
-           "AXISBANK".NS: 1.24,
+           "AXISBANK.NS": 1.24,
            "WAAREEENER.NS": 1.04,
            "AUBANK.NS": 1.01
         }
