@@ -163,7 +163,7 @@ funds = {
         "BAJFINANCE.NS": 2.57,
         "OLAELEC.NS": 2.29,
         "TVSMOTOR.NS": 1.95,
-        "JRRL.NS": 1.94,
+        "JAINREC.NS": 1.94,
         "V2RETAIL.NS": 1.81,
         "GVT&D.NS": 1.64,
         "APOLLOHOSP.NS": 1.45,
