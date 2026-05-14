@@ -143,7 +143,7 @@ funds = {
         "CGPOWER.NS": 5.18,
         "ETERNAL.NS": 5.07,
         "MUTHOOTFIN.NS": 5.05,
-        "BILLIONBRAINS.NS": 4.61,
+        "GROWW.NS": 4.61,
         "SHRIRAMFIN.NS": 4.31,
         "APARINDS.NS": 4.19,
         "WAAREEENER.NS": 3.98,
