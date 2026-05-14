@@ -136,7 +136,40 @@ funds = {
     }
 },
 
-    
+ "Motilal Oswal Large and Midcap Fund": {
+        "nav": 38.07,
+        "holdings": {
+        "MCX.NS": 5.25,
+        "CGPOWER.NS": 5.18,
+        "ETERNAL.NS": 5.07,
+        "MUTHOOTFIN.NS": 5.05,
+        "BILLIONBRAINS.NS": 4.61,
+        "SHRIRAMFIN.NS": 4.31,
+        "APARINDS.NS": 4.19,
+        "WAAREEENER.NS": 3.98,
+        "ONESOURCE.NS": 3.95,
+        "PTCIL.NS": 3.95,
+        "BEL.NS": 3.88,
+        "PREMIERENE.NS": 3.83,
+        "ATHERENERG.NS": 3.73,
+        "PAYTM.NS": 3.55,
+        "SUZLON.NS": 3.55,
+        "AMBER.NS": 3.41,
+        "ZENTEC.NS": 3.26,
+        "MOTHERSON.NS": 3.23,
+        "FLUOROCHEM.NS": 3.06,
+        "TITAN.NS": 2.70,
+        "BDL.NS": 2.69,
+        "BAJFINANCE.NS": 2.57,
+        "OLAELEC.NS": 2.29,
+        "TVSMOTOR.NS": 1.95,
+        "JRRL.NS": 1.94,
+        "V2RETAIL.NS": 1.81,
+        "GVT&D.NS": 1.64,
+        "APOLLOHOSP.NS": 1.45,
+        "RELIGARE.NS": 1.31
+    }
+},   
         "ICICI Midcap Fund": {
         "nav": 374.17,
         "holdings": {
