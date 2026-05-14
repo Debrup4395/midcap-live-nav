@@ -101,7 +101,42 @@ funds = {
         "ASHOKLEY.NS": 0.01
         }
     },
+  "Motilal Oswal Flexicap Fund": {
+        "nav": 61.42,
+        "holdings": {
+        "KALYANKJIL.NS": 7.36,
+        "CGPOWER.NS": 6.43,
+        "ETERNAL.NS": 5.32,
+        "COFORGE.NS": 5.27,
+        "BHARTIARTL.NS": 5.17,
+        "PERSISTENT.NS": 4.56,
+        "SHRIRAMFIN.NS": 4.13,
+        "WAAREEENER.NS": 4.05,
+        "LT.NS": 4.04,
+        "ICICIBANK.NS": 3.86,
+        "ATHERENERG.NS": 3.81,
+        "MCX.NS": 3.72,
+        "INDUSINDBK.NS": 3.61,
+        "APOLLOHOSP.NS": 3.03,
+        "SBIN.NS": 2.83,
+        "HDFCAMC.NS": 2.82,
+        "BEL.NS": 2.77,
+        "PIRAMAL.NS": 2.75,
+        "POLYCAB.NS": 2.65,
+        "PGEL.NS": 2.60,
+        "SUZLON.NS": 2.46,
+        "ASHOKLEY.NS": 2.37,
+        "INDIGO.NS": 2.36,
+        "MOTHERSON.NS": 2.28,
+        "ONESOURCE.NS": 2.20,
+        "RADICO.NS": 1.75,
+        "ADITYAINFO.NS": 1.69,
+        "SIEMENS.NS": 1.37,
+        "ICICIPRULI.NS": 1.01
+    }
+},
 
+    
         "ICICI Midcap Fund": {
         "nav": 374.17,
         "holdings": {
