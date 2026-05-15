@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st_autorefresh(interval=5000, key="refresh")
+st_autorefresh(interval=30000, key="refresh")
 
 # =========================
 # FUND DATA
