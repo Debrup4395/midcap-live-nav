@@ -503,7 +503,7 @@ funds = {
            "MAXHEALTH.NS": 2.23,
            "POLICYBZR.NS": 2.20,
            "TVSMOTOR.NS": 2.08,
-           "ICICIPRULI.NS": 1.96,
+           "ICICIAMC.NS": 1.96,
            "IDFCFIRSTB.NS": 1.47,
            "PREMIERENE.NS": 1.25,
            "AXISBANK.NS": 1.24,
