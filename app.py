@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st_autorefresh(interval=30000, key="refresh")
+st_autorefresh(interval=50000, key="refresh")
 
 # =========================
 # FUND DATA
@@ -18,7 +18,7 @@ st_autorefresh(interval=30000, key="refresh")
 funds = {
 
     "HSBC Midcap Fund": {
-        "nav": 490.77,
+        "nav": 496.49,
         "holdings": {
         "BSE.NS": 5.13,
         "GVT&D.NS": 4.94,
@@ -102,7 +102,7 @@ funds = {
         }
     },
   "Motilal Oswal Flexicap Fund": {
-        "nav": 61.87,
+        "nav": 62.04,
         "holdings": {
         "KALYANKJIL.NS": 7.36,
         "CGPOWER.NS": 6.43,
@@ -137,7 +137,7 @@ funds = {
 },
 
  "Motilal Oswal Large and Midcap Fund": {
-        "nav": 37.48,
+        "nav": 37.67,
         "holdings": {
         "MCX.NS": 5.25,
         "CGPOWER.NS": 5.18,
@@ -171,7 +171,7 @@ funds = {
     }
 },   
         "ICICI Midcap Fund": {
-        "nav": 377.36,
+        "nav": 380.27,
         "holdings": {
         "MCX.NS": 4.88,
         "BSE.NS": 4.87,
@@ -258,7 +258,7 @@ funds = {
     },
 
     "Edelweiss Mid Cap Fund": {
-        "nav": 123.77,
+        "nav": 124.38,
         "holdings": {
             "MCX.NS": 3.15,
             "FEDERALBNK.NS": 2.88,
@@ -349,7 +349,7 @@ funds = {
     },
    
     "HDFC Mid Cap Fund": {
-        "nav": 219.80,
+        "nav": 220.39,
         "holdings": {
             "MFSL.NS": 4.37,
             "AUBANK.NS": 4.24,
@@ -432,7 +432,7 @@ funds = {
     },
 
     "Invesco India Midcap Fund": {
-        "nav": 220.34,
+        "nav": 220.80,
         "holdings": {
             "PRESTIGE.NS": 6.19,
             "BSE.NS": 5.88,
@@ -480,7 +480,7 @@ funds = {
     },
 
     "Motilal Oswal Midcap Fund": {
-        "nav": 105.95,
+        "nav": 106.35,
         "holdings": {
            "PAYTM.NS": 7.29,
            "KALYANKJIL.NS": 7.09,
