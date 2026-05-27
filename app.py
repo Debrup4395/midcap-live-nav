@@ -102,7 +102,7 @@ funds = {
         }
     },
   "Motilal Oswal Flexicap Fund": {
-        "nav": 63.16,
+        "nav": 63.42,
         "holdings": {
         "KALYANKJIL.NS": 7.36,
         "CGPOWER.NS": 6.43,
@@ -137,7 +137,7 @@ funds = {
 },
 
  "Motilal Oswal Large and Midcap Fund": {
-        "nav": 38.07,
+        "nav": 38.24,
         "holdings": {
         "MCX.NS": 5.25,
         "CGPOWER.NS": 5.18,
