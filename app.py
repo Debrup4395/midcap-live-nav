@@ -529,7 +529,7 @@ def fetch_data(tickers):
 
     data = yf.download(
         tickers=tickers,
-        period="2d",
+        period="5d",
         interval="1d",
         auto_adjust=True,
         progress=False,
