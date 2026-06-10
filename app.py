@@ -18,7 +18,7 @@ st_autorefresh(interval=10000, key="refresh")
 funds = {
 
     "HSBC Midcap Fund": {
-        "nav": 496.72,
+        "nav": 504.04,
         "holdings": {
         "BSE.NS": 5.13,
         "GVT&D.NS": 4.94,
@@ -101,77 +101,8 @@ funds = {
         "ASHOKLEY.NS": 0.01
         }
     },
-  "Motilal Oswal Flexicap Fund": {
-        "nav": 62.45,
-        "holdings": {
-        "KALYANKJIL.NS": 7.36,
-        "CGPOWER.NS": 6.43,
-        "ETERNAL.NS": 5.32,
-        "COFORGE.NS": 5.27,
-        "BHARTIARTL.NS": 5.17,
-        "PERSISTENT.NS": 4.56,
-        "SHRIRAMFIN.NS": 4.13,
-        "WAAREEENER.NS": 4.05,
-        "LT.NS": 4.04,
-        "ICICIBANK.NS": 3.86,
-        "ATHERENERG.NS": 3.81,
-        "MCX.NS": 3.72,
-        "INDUSINDBK.NS": 3.61,
-        "APOLLOHOSP.NS": 3.03,
-        "SBIN.NS": 2.83,
-        "HDFCAMC.NS": 2.82,
-        "BEL.NS": 2.77,
-        "PIRAMAL.NS": 2.75,
-        "POLYCAB.NS": 2.65,
-        "PGEL.NS": 2.60,
-        "SUZLON.NS": 2.46,
-        "ASHOKLEY.NS": 2.37,
-        "INDIGO.NS": 2.36,
-        "MOTHERSON.NS": 2.28,
-        "ONESOURCE.NS": 2.20,
-        "RADICO.NS": 1.75,
-        "ADITYAINFO.NS": 1.69,
-        "SIEMENS.NS": 1.37,
-        "ICICIPRULI.NS": 1.01
-    }
-},
-
- "Motilal Oswal Large and Midcap Fund": {
-        "nav": 37.83,
-        "holdings": {
-        "MCX.NS": 5.25,
-        "CGPOWER.NS": 5.18,
-        "ETERNAL.NS": 5.07,
-        "MUTHOOTFIN.NS": 5.05,
-        "GROWW.NS": 4.61,
-        "SHRIRAMFIN.NS": 4.31,
-        "APARINDS.NS": 4.19,
-        "WAAREEENER.NS": 3.98,
-        "ONESOURCE.NS": 3.95,
-        "PTCIL.NS": 3.95,
-        "BEL.NS": 3.88,
-        "PREMIERENE.NS": 3.83,
-        "ATHERENERG.NS": 3.73,
-        "PAYTM.NS": 3.55,
-        "SUZLON.NS": 3.55,
-        "AMBER.NS": 3.41,
-        "ZENTEC.NS": 3.26,
-        "MOTHERSON.NS": 3.23,
-        "FLUOROCHEM.NS": 3.06,
-        "TITAN.NS": 2.70,
-        "BDL.NS": 2.69,
-        "BAJFINANCE.NS": 2.57,
-        "OLAELEC.NS": 2.29,
-        "TVSMOTOR.NS": 1.95,
-        "JAINREC.NS": 1.94,
-        "V2RETAIL.NS": 1.81,
-        "GVT&D.NS": 1.64,
-        "APOLLOHOSP.NS": 1.45,
-        "RELIGARE.NS": 1.31
-    }
-},   
-        "ICICI Midcap Fund": {
-        "nav": 366.14,
+           "ICICI Midcap Fund": {
+        "nav": 370.23,
         "holdings": {
         "MCX.NS": 4.88,
         "BSE.NS": 4.87,
@@ -258,7 +189,7 @@ funds = {
     },
 
     "Edelweiss Mid Cap Fund": {
-        "nav": 121.47,
+        "nav": 122.80,
         "holdings": {
             "MCX.NS": 3.15,
             "FEDERALBNK.NS": 2.88,
@@ -349,7 +280,7 @@ funds = {
     },
    
     "HDFC Mid Cap Fund": {
-        "nav": 218.00,
+        "nav": 220.41,
         "holdings": {
             "MFSL.NS": 4.37,
             "AUBANK.NS": 4.24,
@@ -432,7 +363,7 @@ funds = {
     },
 
     "Invesco India Midcap Fund": {
-        "nav": 219.68,
+        "nav": 222.97,
         "holdings": {
             "PRESTIGE.NS": 6.19,
             "BSE.NS": 5.88,
@@ -480,7 +411,7 @@ funds = {
     },
 
     "Motilal Oswal Midcap Fund": {
-        "nav": 103.32,
+        "nav": 104.43,
         "holdings": {
             "PAYTM.NS": 7.29,
             "COFORGE.NS": 6.12,
