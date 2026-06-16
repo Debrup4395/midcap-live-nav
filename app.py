@@ -18,7 +18,7 @@ st_autorefresh(interval=10000, key="refresh")
 funds = {
 
     "HSBC Midcap Fund": {
-        "nav": 505.49,
+        "nav": 509.43,
         "holdings": {
         "BSE.NS": 5.13,
         "GVT&D.NS": 4.94,
@@ -102,7 +102,7 @@ funds = {
         }
     },
            "ICICI Midcap Fund": {
-        "nav": 374.95,
+        "nav": 383.89,
         "holdings": {
         "MCX.NS": 4.70,
         "BSE.NS": 5.39,
@@ -189,7 +189,7 @@ funds = {
     },
 
     "Edelweiss Mid Cap Fund": {
-        "nav": 123.03,
+        "nav": 124.78,
         "holdings": {
             "MCX.NS": 3.15,
             "FEDERALBNK.NS": 2.88,
@@ -280,7 +280,7 @@ funds = {
     },
    
     "HDFC Mid Cap Fund": {
-        "nav": 220.16,
+        "nav": 223.04,
         "holdings": {
             "MFSL.NS": 4.37,
             "AUBANK.NS": 4.24,
@@ -363,7 +363,7 @@ funds = {
     },
 
     "Invesco India Midcap Fund": {
-        "nav": 223.70,
+        "nav": 228.42,
         "holdings": {
             "BSE.NS": 6.05,
             "PRESTIGE.NS": 5.85,
@@ -411,7 +411,7 @@ funds = {
     },
 
     "Motilal Oswal Midcap Fund": {
-        "nav": 104.57,
+        "nav": 107.76,
         "holdings": {
             "PAYTM.NS": 7.29,
             "COFORGE.NS": 6.12,
