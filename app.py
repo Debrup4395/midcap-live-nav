@@ -442,6 +442,7 @@ funds = {
             "AUBANK.NS": 0.99,
             "STLTECH.NS": 0.91,
             "PWL.NS": 0.57,
+      }
     }
 }
 
