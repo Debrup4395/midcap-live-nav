@@ -2,6 +2,7 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 from datetime import datetime
+import pytz
 from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(
@@ -485,14 +486,34 @@ except Exception as e:
 
 st.title("📈 Live Midcap Fund NAV Tracker")
 
-from datetime import datetime
-import pytz
-
 india = pytz.timezone("Asia/Kolkata")
 
 current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
 
 st.write(f"Last Updated: {current_time}")
+
+# =========================
+# HELPER: SAFE PRICE EXTRACTION
+# =========================
+
+def get_close_series(data, ticker, all_tickers):
+    """
+    Return the Close price series for a ticker, handling both
+    the multi-ticker (MultiIndex) and single-ticker column layouts
+    that yf.download can return.
+    """
+    if len(all_tickers) == 1:
+        if "Close" not in data.columns:
+            raise KeyError(f"No Close column for {ticker}")
+        return data["Close"].dropna()
+
+    if ticker not in data.columns.get_level_values(0):
+        raise KeyError(f"{ticker} not present in downloaded data")
+
+    close = data[ticker]["Close"].dropna()
+    return close
+
+
 # =========================
 # NAV CALCULATION
 # =========================
@@ -504,31 +525,28 @@ for fund_name, fund_data in funds.items():
 
     weighted_return = 0.0
     stock_rows = []
+    skipped = []
 
     for ticker, weight in holdings.items():
 
         try:
+            close = get_close_series(data, ticker, all_tickers)
 
-            stock_data = data[ticker]
+            if len(close) < 2:
+                skipped.append((ticker, weight, "Insufficient price history (newly listed / no prior close)"))
+                continue
 
-            latest_close = float(
-                stock_data["Close"].iloc[-1]
-            )
+            latest_close = float(close.iloc[-1])
+            previous_close = float(close.iloc[-2])
 
-            previous_close = float(
-                stock_data["Close"].iloc[-2]
-            )
-
-            if previous_close == 0:
+            if previous_close == 0 or pd.isna(previous_close) or pd.isna(latest_close):
+                skipped.append((ticker, weight, "Invalid/zero close price"))
                 continue
 
             change_percent = (
                 (latest_close - previous_close)
                 / previous_close
             ) * 100
-
-            if pd.isna(change_percent):
-                continue
 
             contribution = (
                 weight / 100
@@ -543,8 +561,13 @@ for fund_name, fund_data in funds.items():
                 "Contribution": round(contribution, 3)
             })
 
-        except:
-            continue
+        except KeyError:
+            skipped.append((ticker, weight, "Ticker not found in yfinance data (check symbol / possibly delisted)"))
+        except IndexError:
+            skipped.append((ticker, weight, "Not enough trading days available (likely a recent listing)"))
+        except Exception as e:
+            skipped.append((ticker, weight, f"Unexpected error: {e}"))
+
     expected_nav = previous_nav * (
         1 + weighted_return / 100
     )
@@ -580,6 +603,13 @@ for fund_name, fund_data in funds.items():
         "Portfolio Move",
         f"{weighted_return:.2f}%"
     )
+
+    total_weight = sum(h["Weight %"] for h in stock_rows)
+    st.caption(
+        f"{len(stock_rows)}/{len(holdings)} holdings priced "
+        f"(covers {total_weight:.2f}% of {sum(holdings.values()):.2f}% total weight)"
+    )
+
     df = pd.DataFrame(stock_rows)
 
     if not df.empty:
@@ -594,6 +624,14 @@ for fund_name, fund_data in funds.items():
             use_container_width=True,
             height=400
         )
+
+    if skipped:
+        with st.expander(f"⚠️ {len(skipped)} holding(s) skipped in {fund_name}"):
+            skipped_df = pd.DataFrame(
+                skipped, columns=["Stock", "Weight %", "Reason"]
+            ).sort_values(by="Weight %", ascending=False)
+            st.dataframe(skipped_df, use_container_width=True)
+
 # =====================================================
 # BEST & WORST FUND
 # =====================================================
