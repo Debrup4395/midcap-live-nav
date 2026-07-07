@@ -395,7 +395,7 @@ funds = {
             "APARINDS.NS": 1.42,
             "PHOENIXLTD.NS": 1.38,
             "KIMS.NS": 1.19,
-            "CRAFSMAN.NS": 1.06,
+            "CRAFTSMAN.NS": 1.06,
             "ETHOSLTD.NS": 1.01,
             "CORONA.NS": 0.95,
             "DRAGARWQ.NS": 0.88,
