@@ -621,7 +621,7 @@ for fund_name, fund_data in funds.items():
 
         st.dataframe(
             df,
-            use_container_width=True,
+            width="stretch",
             height=400
         )
 
@@ -630,7 +630,7 @@ for fund_name, fund_data in funds.items():
             skipped_df = pd.DataFrame(
                 skipped, columns=["Stock", "Weight %", "Reason"]
             ).sort_values(by="Weight %", ascending=False)
-            st.dataframe(skipped_df, use_container_width=True)
+            st.dataframe(skipped_df, use_container_width="stretch")
 
 # =====================================================
 # BEST & WORST FUND
