@@ -468,7 +468,7 @@ def fetch_data(tickers):
         auto_adjust=True,
         progress=False,
         group_by="ticker",
-        threads=True
+        threads=False
     )
 
     return data
@@ -630,7 +630,10 @@ for fund_name, fund_data in funds.items():
             skipped_df = pd.DataFrame(
                 skipped, columns=["Stock", "Weight %", "Reason"]
             ).sort_values(by="Weight %", ascending=False)
-            st.dataframe(skipped_df, use_container_width="stretch")
+            st.dataframe(
+    skipped_df,
+    width="stretch"
+)
 
 # =====================================================
 # BEST & WORST FUND
