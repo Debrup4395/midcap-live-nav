@@ -1,6 +1,5 @@
-streamlit
-pandas
-yfinance
-streamlit-autorefresh
-numpy
-pytz
+streamlit==1.49.1
+pandas==2.3.1
+numpy==2.3.0
+yfinance==0.2.65
+pyarrow==21.0.0
