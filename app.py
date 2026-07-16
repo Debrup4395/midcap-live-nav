@@ -181,7 +181,7 @@ funds = {
         "VTL.NS": 0.05,
         "KAJARIACER.NS": 0.03,
         "JSWENERGY.NS": 0.02,
-        "GUJGASLTD.NS": 0.02,
+        "GUJENERGY.NS": 0.02,
         "ASTEC.NS": 0.02,
         "ASTRAMICRO.NS": 0.02,
         "CAMLINFINE.NS": 0.01,
