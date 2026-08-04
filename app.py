@@ -450,8 +450,33 @@ funds = {
 }
 
 # =========================
-# FETCH DATA
+# FETCH DATA (fast_info primary + batched-download fallback)
 # =========================
+#
+# WHY THE OLD VERSION COULD SHOW WRONG PRICES / WRONG % CHANGE:
+# Both the "previous close" and the "latest close" used as a stand-in
+# for the live price came from the SAME single batched yf.download()
+# daily-bar table, via close.iloc[-2] / close.iloc[-1]. That sounds
+# internally consistent, but early in the trading session Yahoo's
+# daily bar for TODAY often doesn't exist yet in that download
+# response. When that happens, iloc[-1] silently becomes YESTERDAY's
+# close (not live) and iloc[-2] becomes the close from TWO days ago --
+# both numbers are stale, and the resulting "% change" can be wrong,
+# sometimes even the wrong direction.
+#
+# FIX: for each ticker, pull BOTH previous close and live price from a
+# single fast_info snapshot -- fast_info.previous_close is Yahoo's own
+# live "last completed session" reference price and fast_info.last_price
+# is the true current quote, so the two numbers can never desync from
+# each other the way two daily bars pulled at different times could.
+# The batched daily-bar download is kept as a fallback (and still
+# powers the "skipped holdings" diagnostics), used only for tickers
+# where fast_info comes back empty.
+#
+# Because this file spans ~150 unique tickers across 6 funds, fast_info
+# calls are cached per-ticker for the same duration as the fallback
+# batch (ttl=300s) so a 60s auto-refresh doesn't re-hit Yahoo for every
+# single symbol on every rerun.
 
 all_tickers = []
 
@@ -460,12 +485,15 @@ for fund in funds.values():
 
 all_tickers = list(set(all_tickers))
 
+
 @st.cache_data(ttl=300)
 def fetch_data(tickers):
-
+    """Fallback-only daily bar data, used solely when fast_info fails
+    for a given ticker (and to power the 'skipped holdings' diagnostics
+    for symbols that fail on both sources)."""
     data = yf.download(
         tickers=tickers,
-        period="5d",
+        period="10d",
         interval="1d",
         auto_adjust=True,
         progress=False,
@@ -474,6 +502,26 @@ def fetch_data(tickers):
     )
 
     return data
+
+
+@st.cache_data(ttl=300)
+def get_quote(ticker):
+    """Primary source: previous close AND live price from the SAME
+    live-quote snapshot, so they can never desync from each other."""
+    try:
+        fi = yf.Ticker(ticker).fast_info
+        live_price = fi.get("last_price") or fi.get("lastPrice")
+        prev_close = (
+            fi.get("previous_close")
+            or fi.get("previousClose")
+            or fi.get("regular_market_previous_close")
+        )
+        if live_price and prev_close:
+            return float(prev_close), float(live_price)
+    except Exception:
+        pass
+    return None, None
+
 
 try:
     data = fetch_data(all_tickers)
@@ -495,14 +543,15 @@ current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
 st.write(f"Last Updated: {current_time}")
 
 # =========================
-# HELPER: SAFE PRICE EXTRACTION
+# HELPER: SAFE PRICE EXTRACTION (fallback path only)
 # =========================
 
 def get_close_series(data, ticker, all_tickers):
     """
-    Return the Close price series for a ticker, handling both
-    the multi-ticker (MultiIndex) and single-ticker column layouts
-    that yf.download can return.
+    Fallback-only helper. Return the Close price series for a ticker,
+    handling both the multi-ticker (MultiIndex) and single-ticker
+    column layouts that yf.download can return. Only used when
+    fast_info didn't return a usable quote for this ticker.
     """
     if len(all_tickers) == 1:
         if "Close" not in data.columns:
@@ -532,14 +581,20 @@ for fund_name, fund_data in funds.items():
     for ticker, weight in holdings.items():
 
         try:
-            close = get_close_series(data, ticker, all_tickers)
+            # PRIMARY: single consistent snapshot from fast_info
+            previous_close, latest_close = get_quote(ticker)
 
-            if len(close) < 2:
-                skipped.append((ticker, weight, "Insufficient price history (newly listed / no prior close)"))
-                continue
+            if previous_close is None or latest_close is None:
+                # FALLBACK: last COMPLETE daily bar pair from the
+                # batched download, only used if fast_info failed
+                close = get_close_series(data, ticker, all_tickers)
 
-            latest_close = float(close.iloc[-1])
-            previous_close = float(close.iloc[-2])
+                if len(close) < 2:
+                    skipped.append((ticker, weight, "Insufficient price history (newly listed / no prior close)"))
+                    continue
+
+                latest_close = float(close.iloc[-1])
+                previous_close = float(close.iloc[-2])
 
             if previous_close == 0 or pd.isna(previous_close) or pd.isna(latest_close):
                 skipped.append((ticker, weight, "Invalid/zero close price"))
