@@ -413,39 +413,42 @@ funds = {
         }
     },
 
+    # Updated to Motilal Oswal Mutual Fund's Monthly Portfolio Statement
+    # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
     "Motilal Oswal Midcap Fund": {
         "nav": 118.06,
         "holdings": {
-            "PAYTM.NS": 7.34,
-            "KALYANKJIL.NS": 6.34,
-            "COFORGE.NS": 6.04,
-            "ETERNAL.NS": 5.96,
-            "KEI.NS": 5.61,
-            "ABCAPITAL.NS": 5.49,
-            "PERSISTENT.NS": 4.59,
-            "GROWW.NS": 4.56,
-            "SHRIRAMFIN.NS": 3.78,
-            "BSE.NS": 3.61,
-            "MCX.NS": 3.48,
-            "TIINDIA.NS": 3.44,
-            "DIXON.NS": 3.26,
-            "PRESTIGE.NS": 3.10,
-            "BHARTIHEXA.NS": 2.97,
-            "MAXHEALTH.NS": 2.80,
-            "LTF.NS": 2.77,
-            "SUZLON.NS": 2.47,
-            "POLICYBZR.NS": 2.35,
-            "ICICIAMC.NS": 2.25,
-            "IDFCFIRSTB.NS": 2.25,
-            "BEL.NS": 2.21,
-            "MOTHERSON.NS": 2.20,
-            "PREMIERENE.NS": 2.19,
-            "WAAREEENER.NS": 1.91,
-            "INDIGO.NS": 1.68,
-            "AUBANK.NS": 0.99,
-            "STLTECH.NS": 0.91,
-            "PWL.NS": 0.57,
-      }
+            "KALYANKJIL.NS": 8.87,   # Kalyan Jewellers India Limited
+            "PAYTM.NS": 8.08,        # One 97 Communications Limited
+            "ETERNAL.NS": 6.37,      # Eternal Limited
+            "COFORGE.NS": 5.58,      # Coforge Limited
+            "ABCAPITAL.NS": 5.20,    # Aditya Birla Capital Limited
+            "KEI.NS": 4.81,          # KEI Industries Limited
+            "PERSISTENT.NS": 4.75,   # Persistent Systems Ltd
+            "GROWW.NS": 4.08,        # Billionbrains Garage Ventures Ltd (Groww)
+            "SHRIRAMFIN.NS": 3.75,   # Shriram Finance Limited
+            "DIXON.NS": 3.48,        # Dixon Technologies (India) Limited
+            "MCX.NS": 2.90,          # Multi Commodity Exchange of India Limited
+            "TIINDIA.NS": 2.83,      # Tube Investments Of India Limited
+            "BSE.NS": 2.73,          # BSE Limited
+            "STLTECH.NS": 2.66,      # Sterlite Technologies Limited
+            "PRESTIGE.NS": 2.58,     # Prestige Estates Projects Limited
+            "LTF.NS": 2.55,          # L&T Finance Limited
+            "BHARTIHEXA.NS": 2.55,   # Bharti Hexacom Limited
+            "SUZLON.NS": 2.34,       # Suzlon Energy Limited
+            "IDFCFIRSTB.NS": 2.25,   # IDFC First Bank Limited
+            "MAXHEALTH.NS": 2.20,    # Max Healthcare Institute Limited
+            "POLICYBZR.NS": 2.16,    # PB Fintech Limited
+            "PREMIERENE.NS": 2.15,   # Premier Energies Limited
+            "MOTHERSON.NS": 2.09,    # Samvardhana Motherson International Limited
+            "ICICIAMC.NS": 1.98,     # ICICI Prudential Asset Management Company Limited
+            "BEL.NS": 1.90,          # Bharat Electronics Limited
+            "INDIGO.NS": 1.83,       # InterGlobe Aviation Limited
+            "WAAREEENER.NS": 1.63,   # Waaree Energies Limited
+            "ADANIENT.NS": 0.91,     # Adani Enterprises Limited
+            "PWL.NS": 0.60,          # PhysicsWallah Limited
+            "AUBANK.NS": 0.06,       # AU Small Finance Bank Limited
+        }
     }
 }
 
