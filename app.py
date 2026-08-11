@@ -183,101 +183,108 @@ funds = {
         }
     },
 
+    # Updated to Edelweiss Mutual Fund's Portfolio Statement
+    # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
+    # Excludes TREPS/Reverse Repo, Accrued Interest, and Net Receivables/
+    # (Payables) lines (cash-equivalents, not equities).
+    # "SPR Auto Technologies Ltd." (0.14%) is omitted - ticker could not be
+    # confidently resolved on NSE. "Deepak Nitrite Ltd." (0.00%) is omitted
+    # since it has no impact on the NAV calc.
     "Edelweiss Mid Cap Fund": {
         "nav": 130.16,
         "holdings": {
-            "FEDERALBNK.NS": 3.87,
-            "BSE.NS": 2.61,
-            "FORTIS.NS": 2.25,
-            "MARICO.NS": 2.22,
-            "SOLARINDS.NS": 2.15,
-            "MCX.NS": 2.14,
-            "BHEL.NS": 1.88,
-            "IDFCFIRSTB.NS": 1.78,
-            "CUB.NS": 1.78,
-            "IPCALAB.NS": 1.76,
-            "CREDITACC.NS": 1.71,
-            "RADICO.NS": 1.68,
-            "LTF.NS": 1.67,
-            "BHARATFORG.NS": 1.64,
-            "AUBANK.NS": 1.60,
-            "COFORGE.NS": 1.60,
-            "INDIANB.NS": 1.54,
-            "JSWENERGY.NS": 1.53,
-            "MAXHEALTH.NS": 1.52,
-            "NMDC.NS": 1.48,
-            "CUMMINSIND.NS": 1.47,
-            "GVT&D.NS": 1.43,
-            "KEI.NS": 1.42,
-            "UNOMINDA.NS": 1.39,
-            "HDFCAMC.NS": 1.34,
-            "APLAPOLLO.NS": 1.33,
-            "INDUSTOWER.NS": 1.33,
-            "MFSL.NS": 1.31,
-            "KARURVYSYA.NS": 1.30,
-            "ASHOKLEY.NS": 1.29,
-            "TORNTPOWER.NS": 1.29,
-            "HINDPETRO.NS": 1.25,
-            "PERSISTENT.NS": 1.24,
-            "POLICYBZR.NS": 1.23,
-            "POLYCAB.NS": 1.20,
-            "PHOENIXLTD.NS": 1.20,
-            "JKCEMENT.NS": 1.19,
-            "JSL.NS": 1.19,
-            "LUPIN.NS": 1.14,
-            "PAGEIND.NS": 1.14,
-            "AJANTPHARM.NS": 1.12,
-            "SUNDARMFIN.NS": 1.12,
-            "INDHOTEL.NS": 1.05,
-            "VMM.NS": 1.04,
-            "SRF.NS": 1.03,
-            "BEL.NS": 1.00,
-            "CHOLAFIN.NS": 0.99,
-            "MANKIND.NS": 0.99,
-            "IDEA.NS": 0.97,
-            "ENDURANCE.NS": 0.94,
-            "LGEINDIA.NS": 0.90,
-            "JUBLFOOD.NS": 0.88,
-            "PRESTIGE.NS": 0.86,
-            "SAIL.NS": 0.86,
-            "GROWW.NS": 0.81,
-            "TVSMOTOR.NS": 0.80,
-            "BALKRISIND.NS": 0.78,
-            "ICICIAMC.NS": 0.75,
-            "POWERINDIA.NS": 0.75,
-            "JBCHEPHARM.NS": 0.74,
-            "SUMICHEM.NS": 0.73,
-            "SCHAEFFLER.NS": 0.71,
-            "DIXON.NS": 0.69,
-            "ATHERENERG.NS": 0.68,
-            "THERMAX.NS": 0.67,
-            "CGPOWER.NS": 0.65,
-            "BLUESTARCO.NS": 0.64,
-            "BIKAJI.NS": 0.63,
-            "CRAFTSMAN.NS": 0.58,
-            "LAURUSLABS.NS": 0.56,
-            "TRITURBINE.NS": 0.55,
-            "BHARTIHEXA.NS": 0.55,
-            "COROMANDEL.NS": 0.53,
-            "BDL.NS": 0.47,
-            "NYKAA.NS": 0.46,
-            "ELECON.NS": 0.45,
-            "360ONE.NS": 0.44,
-            "BERGEPAINT.NS": 0.40,
-            "OIL.NS": 0.39,
-            "FSL.NS": 0.34,
-            "SUPREMEIND.NS": 0.33,
-            "NETWEB.NS": 0.31,
-            "PNBHOUSING.NS": 0.30,
-            "SWIGGY.NS": 0.30,
-            "NAVINFLUOR.NS": 0.29,
-            "ASTRAL.NS": 0.29,
-            "ITCHOTELS.NS": 0.27,
-            "OBEROIRLTY.NS": 0.24,
-            "MUTHOOTFIN.NS": 0.18,
-            "MRF.NS": 0.07,
-            "CEATLTD.NS": 0.0,
-            "DEEPAKNTR.NS": 0.0,
+            "FEDERALBNK.NS": 4.00,   # The Federal Bank Ltd.
+            "BSE.NS": 2.33,          # BSE Ltd.
+            "MCX.NS": 2.26,          # Multi Commodity Exchange Of India Ltd.
+            "MARICO.NS": 2.19,       # Marico Ltd.
+            "PERSISTENT.NS": 2.15,   # Persistent Systems Ltd.
+            "FORTIS.NS": 2.11,       # Fortis Healthcare Ltd.
+            "COFORGE.NS": 2.01,      # Coforge Ltd.
+            "SOLARINDS.NS": 2.01,    # Solar Industries India Ltd.
+            "IDFCFIRSTB.NS": 1.80,   # IDFC First Bank Ltd.
+            "RADICO.NS": 1.76,       # Radico Khaitan Ltd.
+            "CREDITACC.NS": 1.73,    # Creditaccess Grameen Ltd.
+            "IPCALAB.NS": 1.71,      # IPCA Laboratories Ltd.
+            "CUB.NS": 1.67,          # City Union Bank Ltd.
+            "BHARATFORG.NS": 1.60,   # Bharat Forge Ltd.
+            "LTF.NS": 1.59,          # L&T Finance Ltd.
+            "AUBANK.NS": 1.54,       # AU Small Finance Bank Ltd.
+            "DIXON.NS": 1.51,        # Dixon Technologies (India) Ltd.
+            "INDIANB.NS": 1.49,      # Indian Bank
+            "TVSMOTOR.NS": 1.49,     # TVS Motor Company Ltd.
+            "INDHOTEL.NS": 1.47,     # The Indian Hotels Company Ltd.
+            "PHOENIXLTD.NS": 1.45,   # The Phoenix Mills Ltd.
+            "UNOMINDA.NS": 1.43,     # UNO Minda Ltd.
+            "KARURVYSYA.NS": 1.43,   # Karur Vysya Bank Ltd.
+            "MAXHEALTH.NS": 1.41,    # Max Healthcare Institute Ltd.
+            "OBEROIRLTY.NS": 1.34,   # Oberoi Realty Ltd.
+            "BHEL.NS": 1.32,         # Bharat Heavy Electricals Ltd.
+            "PRESTIGE.NS": 1.31,     # Prestige Estates Projects Ltd.
+            "ASHOKLEY.NS": 1.30,     # Ashok Leyland Ltd.
+            "APLAPOLLO.NS": 1.29,    # APL Apollo Tubes Ltd.
+            "INDUSTOWER.NS": 1.26,   # Indus Towers Ltd.
+            "HDFCAMC.NS": 1.25,      # HDFC Asset Management Company Ltd.
+            "KEI.NS": 1.24,          # KEI Industries Ltd.
+            "JSL.NS": 1.20,          # Jindal Stainless Ltd.
+            "GVT&D.NS": 1.19,        # GE Vernova T&D India Limited
+            "MFSL.NS": 1.18,         # Max Financial Services Ltd.
+            "HINDPETRO.NS": 1.17,    # Hindustan Petroleum Corporation Ltd.
+            "JSWENERGY.NS": 1.16,    # JSW Energy Ltd.
+            "POLICYBZR.NS": 1.15,    # PB Fintech Ltd.
+            "JKCEMENT.NS": 1.13,     # JK Cement Ltd.
+            "SUNDARMFIN.NS": 1.10,   # Sundaram Finance Ltd.
+            "AJANTPHARM.NS": 1.08,   # Ajanta Pharma Ltd.
+            "PAGEIND.NS": 1.05,      # Page Industries Ltd.
+            "MRF.NS": 1.01,          # MRF Ltd.
+            "LUPIN.NS": 0.98,        # Lupin Ltd.
+            "CHOLAFIN.NS": 0.97,     # Cholamandalam Investment & Finance Company Ltd.
+            "TORNTPOWER.NS": 0.96,   # Torrent Power Ltd.
+            "POLYCAB.NS": 0.96,      # Polycab India Ltd.
+            "CUMMINSIND.NS": 0.93,   # Cummins India Ltd.
+            "ENDURANCE.NS": 0.92,    # Endurance Technologies Ltd.
+            "ATHERENERG.NS": 0.91,   # Ather Energy Ltd.
+            "MANKIND.NS": 0.91,      # Mankind Pharma Ltd.
+            "VMM.NS": 0.89,          # Vishal Mega Mart Ltd
+            "BEL.NS": 0.89,          # Bharat Electronics Ltd.
+            "JUBLFOOD.NS": 0.88,     # Jubilant Foodworks Ltd.
+            "SUMICHEM.NS": 0.84,     # Sumitomo Chemical India Ltd.
+            "NMDC.NS": 0.83,         # NMDC Ltd.
+            "IDEA.NS": 0.83,         # Vodafone Idea Ltd.
+            "LGEINDIA.NS": 0.82,     # LG Electronics India Ltd.
+            "SAIL.NS": 0.80,         # Steel Authority of India Ltd.
+            "TORNTPHARM.NS": 0.80,   # Torrent Pharmaceuticals Ltd.
+            "GROWW.NS": 0.74,        # Billionbrains Garage Ventures Ltd.
+            "COROMANDEL.NS": 0.68,   # Coromandel International Ltd.
+            "360ONE.NS": 0.67,       # 360 One Wam Ltd.
+            "ICICIAMC.NS": 0.67,     # ICICI Prudential Asset Mgmt Co Ltd.
+            "SCHAEFFLER.NS": 0.65,   # Schaeffler India Ltd.
+            "LAURUSLABS.NS": 0.64,   # Laurus Labs Ltd.
+            "BLUESTARCO.NS": 0.63,   # Blue Star Ltd.
+            "BIKAJI.NS": 0.59,       # Bikaji Foods International Ltd.
+            "CRAFTSMAN.NS": 0.58,    # Craftsman Automation Ltd.
+            "BHARTIHEXA.NS": 0.56,   # Bharti Hexacom Ltd.
+            "THERMAX.NS": 0.53,      # Thermax Ltd.
+            "SRF.NS": 0.49,          # SRF Ltd.
+            "PNBHOUSING.NS": 0.47,   # PNB Housing Finance Ltd.
+            "NYKAA.NS": 0.46,        # FSN E-Commerce Ventures Ltd.
+            "EXIDEIND.NS": 0.46,     # Exide Industries Ltd.
+            "TRITURBINE.NS": 0.45,   # Triveni Turbine Ltd.
+            "FSL.NS": 0.43,          # Firstsource Solutions Ltd.
+            "CEATLTD.NS": 0.42,      # CEAT Ltd.
+            "OIL.NS": 0.41,          # Oil India Ltd.
+            "BDL.NS": 0.41,          # Bharat Dynamics Ltd.
+            "BERGEPAINT.NS": 0.39,   # Berger Paints (I) Ltd.
+            "ITCHOTELS.NS": 0.39,    # ITC Hotels Ltd.
+            "SUPREMEIND.NS": 0.35,   # Supreme Industries Ltd.
+            "SWIGGY.NS": 0.34,       # Swiggy Ltd.
+            "ELECON.NS": 0.34,       # Elecon Engineering Company Ltd.
+            "LENSKART.NS": 0.30,     # Lenskart Solutions Ltd.
+            "ASTRAL.NS": 0.30,       # Astral Ltd.
+            "NETWEB.NS": 0.29,       # Netweb Technologies India Ltd.
+            "NAVINFLUOR.NS": 0.27,   # Navin Fluorine International Ltd.
+            "CGPOWER.NS": 0.26,      # CG Power and Industrial Solutions Ltd.
+            "BALKRISIND.NS": 0.25,   # Balkrishna Industries Ltd.
+            "COCHINSHIP.NS": 0.19,   # Cochin Shipyard Ltd.
         }
     },
 
