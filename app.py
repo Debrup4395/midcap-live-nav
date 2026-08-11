@@ -19,7 +19,7 @@ st_autorefresh(interval=60000, key="refresh")
 funds = {
 
     "HSBC Midcap Fund": {
-        "nav": 530.65,
+        "nav": 535.81,
         "holdings": {
         "NYKAA.NS": 4.67,
         "FEDERALBNK.NS": 4.21,
@@ -100,7 +100,7 @@ funds = {
         }
     },
            "ICICI Midcap Fund": {
-        "nav": 387.83,
+        "nav": 391.08,
         # Updated to ICICI Prudential Midcap Fund's Monthly Portfolio
         # Statement as on July 31, 2026 (equity holdings only).
         "holdings": {
@@ -184,7 +184,7 @@ funds = {
     },
 
     "Edelweiss Mid Cap Fund": {
-        "nav": 129.55,
+        "nav": 130.16,
         "holdings": {
             "FEDERALBNK.NS": 3.87,
             "BSE.NS": 2.61,
@@ -284,7 +284,7 @@ funds = {
     # Updated to HDFC Mutual Fund's Portfolio Statement
     # as on July 31, 2026 (equity holdings only; weights are "% to NAV").
     "HDFC Mid Cap Fund": {
-        "nav": 235.90,
+        "nav": 236.83,
         "holdings": {
             "FEDERALBNK.NS": 4.36,
             "AUBANK.NS": 3.96,
@@ -369,7 +369,7 @@ funds = {
     },
 
     "Invesco India Midcap Fund": {
-        "nav": 243.34,
+        "nav": 244.21,
         "holdings": {
             "BSE.NS": 6.05,
             "PRESTIGE.NS": 5.85,
@@ -419,7 +419,7 @@ funds = {
     # Updated to Motilal Oswal Mutual Fund's Monthly Portfolio Statement
     # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
     "Motilal Oswal Midcap Fund": {
-        "nav": 118.06,
+        "nav": 119.58,
         "holdings": {
             "KALYANKJIL.NS": 8.87,   # Kalyan Jewellers India Limited
             "PAYTM.NS": 8.08,        # One 97 Communications Limited
