@@ -18,85 +18,85 @@ st_autorefresh(interval=60000, key="refresh")
 
 funds = {
 
+    # Updated to HSBC Mutual Fund's Portfolio Statement
+    # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
+    # Excludes Treps and Net Current Assets (cash-equivalent lines, not equities).
+    # Entries listed at 0.00% in the statement are omitted (no impact on NAV calc).
     "HSBC Midcap Fund": {
         "nav": 535.81,
         "holdings": {
-        "NYKAA.NS": 4.67,
-        "FEDERALBNK.NS": 4.21,
-        "GVT&D.NS": 3.99,
-        "LENSKART.NS": 3.84,
-        "POLICYBZR.NS": 3.76,
-        "PIRAMALFIN.NS": 3.66,
-        "CPPLUS.NS": 3.54,
-        "GROWW.NS": 3.28,
-        "BHARATFORG.NS": 3.19,
-        "MEESHO.NS": 2.87,
-        "THERMAX.NS": 2.78,
-        "APARINDS.NS": 2.55,
-        "POWERINDIA.NS": 2.53,
-        "MANKIND.NS": 2.47,
-        "NAM-INDIA.NS": 2.39,
-        "RADICO.NS": 2.29,
-        "NETWEB.NS": 2.06,
-        "JSWENERGY.NS": 2.06,
-        "LUPIN.NS": 1.94,
-        "INDIANB.NS": 1.93,
-        "AUBANK.NS": 1.90,
-        "M&MFIN.NS": 1.82,
-        "ICICIAMC.NS": 1.77,
-        "ATHERENERG.NS": 1.73,
-        "IPCALAB.NS": 1.69,
-        "CUB.NS": 1.67,
-        "MCX.NS": 1.63,
-        "ABCAPITAL.NS": 1.63,
-        "DATAPATTNS.NS": 1.62,
-        "GODFRYPHLP.NS": 1.57,
-        "THYROCARE.NS": 1.56,
-        "TDPOWERSYS.NS": 1.45,
-        "BHEL.NS": 1.42,
-        "SYNGENE.NS": 1.39,
-        "COCHINSHIP.NS": 1.25,
-        "POLYCAB.NS": 1.22,
-        "KEI.NS": 1.19,
-        "NAVINFLUOR.NS": 1.12,
-        "ATLANTAELE.NS": 1.07,
-        "AVALON.NS": 1.04,
-        "BSE.NS": 0.96,
-        "KIRLOSENG.NS": 0.96,
-        "POLYMED.NS": 0.85,
-        "TRITURBINE.NS": 0.67,
-        "JINDALSTEL.NS": 0.59,
-        "NTPCGREEN.NS": 0.53,
-        "JSWSTEEL.NS": 0.51,
-        "NATIONALUM.NS": 0.48,
-        "TVSMOTOR.NS": 0.48,
-        "SCHAEFFLER.NS": 0.41,
-        "SAFARI.NS": 0.40,
-        "CREDITACC.NS": 0.37,
-        "KAYNES.NS": 0.33,
-        "CGPOWER.NS": 0.33,
-        "ACMESOLAR.NS": 0.33,
-        "ANTHEM.NS": 0.32,
-        "BHARTIHEXA.NS": 0.10,
-        "HINDALCO.NS": 0.09,
-        "BOSCHLTD.NS": 0.07,
-        "OIL.NS": 0.07,
-        "TATASTEEL.NS": 0.05,
-        "CRISIL.NS": 0.04,
-        "COFORGE.NS": 0.04,
-        "IDFCFIRSTB.NS": 0.04,
-        "MFSL.NS": 0.03,
-        "MUTHOOTFIN.NS": 0.03,
-        "MAZDOCK.NS": 0.03,
-        "JKCEMENT.NS": 0.02,
-        "DIXON.NS": 0.02,
-        "SWIGGY.NS": 0.02,
-        "HINDPETRO.NS": 0.01,
-        "PERSISTENT.NS": 0.01,
-        "SUNDARMFIN.NS": 0.01,
-        "MAXHEALTH.NS": 0.01,
-        "BIOCON.NS": 0.01,
-        "APLAPOLLO.NS": 0.01
+        "FEDERALBNK.NS": 4.91,   # The Federal Bank Limited
+        "LENSKART.NS": 4.13,     # Lenskart Solutions Limited
+        "NYKAA.NS": 4.04,        # FSN E-Commerce Ventures Limited
+        "PIRAMALFIN.NS": 3.66,   # Piramal Finance Ltd
+        "POLICYBZR.NS": 3.64,    # PB Fintech Limited
+        "GVT&D.NS": 3.43,        # GE Vernova T&D India Limited
+        "MEESHO.NS": 3.34,       # Meesho Limited
+        "BHARATFORG.NS": 3.22,   # Bharat Forge Limited
+        "CPPLUS.NS": 2.92,       # Aditya Infotech Limited
+        "M&MFIN.NS": 2.88,       # Mahindra & Mahindra Financial Serv Ltd.
+        "APARINDS.NS": 2.51,     # APAR INDUSTRIES LTD
+        "JSWENERGY.NS": 2.51,    # JSW Energy Limited
+        "RADICO.NS": 2.48,       # Radico Khaitan Limited
+        "MANKIND.NS": 2.37,      # Mankind Pharma Limited
+        "NAM-INDIA.NS": 2.36,    # Nippon Life India Asset Management Ltd
+        "POWERINDIA.NS": 2.30,   # Hitachi Energy India Limited
+        "THERMAX.NS": 2.29,      # Thermax Limited
+        "NETWEB.NS": 2.03,       # Netweb Technologies India Limited
+        "ATHERENERG.NS": 2.02,   # Ather Energy Limited
+        "ABCAPITAL.NS": 1.90,    # Aditya Birla Capital Limited
+        "AUBANK.NS": 1.89,       # AU Small Finance Bank Limited
+        "PRESTIGE.NS": 1.89,     # Prestige Estates Projects Limited
+        "COCHINSHIP.NS": 1.87,   # Cochin Shipyard Limited
+        "DATAPATTNS.NS": 1.84,   # Data Patterns (India) Limited
+        "IPCALAB.NS": 1.71,      # IPCA Laboratories Limited
+        "CUB.NS": 1.63,          # City Union Bank Limited
+        "THYROCARE.NS": 1.63,    # Thyrocare Technologies Limited
+        "INDIANB.NS": 1.62,      # Indian Bank
+        "GODFRYPHLP.NS": 1.52,   # Godfrey Phillips India Limited
+        "ICICIAMC.NS": 1.48,     # ICICI Prudential AMC Ltd
+        "LUPIN.NS": 1.42,        # Lupin Limited
+        "INDUSINDBK.NS": 1.41,   # IndusInd Bank Limited
+        "COFORGE.NS": 1.26,      # Coforge Limited
+        "ASHOKLEY.NS": 1.24,     # Ashok Leyland Limited
+        "SYNGENE.NS": 1.20,      # Syngene International Limited
+        "ZYDUSLIFE.NS": 1.18,    # Zydus Lifesciences Limited
+        "TDPOWERSYS.NS": 1.16,   # TD Power Systems Limited
+        "POLYCAB.NS": 1.10,      # Polycab India Limited
+        "NAVINFLUOR.NS": 1.09,   # Navin Fluorine International Limited
+        "KEI.NS": 1.08,          # KEI Industries Limited
+        "CGPOWER.NS": 1.02,      # CG Power And Industrial Solutions Ltd
+        "MCX.NS": 0.96,          # Multi Commodity Exchange of India Ltd.
+        "POLYMED.NS": 0.96,      # Poly Medicure Ltd
+        "GROWW.NS": 0.90,        # Billionbrains Garage Ventures Ltd.
+        "ATLANTAELE.NS": 0.89,   # Atlanta Electricals Limited
+        "AVALON.NS": 0.89,       # AVALON TECHNOLOGIES LIMITED
+        "TRITURBINE.NS": 0.72,   # TRIVENI TURBINE LTD.
+        "KFINTECH.NS": 0.69,     # KFin Technologies Limited
+        "KIRLOSENG.NS": 0.60,    # Kirloskar Oil Engines Ltd
+        "TVSMOTOR.NS": 0.58,     # TVS Motor Company Limited
+        "CREDITACC.NS": 0.39,    # Creditaccess Grameen Limited
+        "BSE.NS": 0.32,          # BSE Ltd
+        "JSWSTEEL.NS": 0.28,     # JSW Steel Limited
+        "SAFARI.NS": 0.14,       # SAFARI INDUSTRIES (INDIA) LIMITED
+        "HINDALCO.NS": 0.09,     # Hindalco Industries Limited
+        "CRISIL.NS": 0.05,       # CRISIL Limited
+        "IDFCFIRSTB.NS": 0.04,   # IDFC First Bank Limited
+        "MUTHOOTFIN.NS": 0.03,   # Muthoot Finance Limited
+        "MFSL.NS": 0.03,         # Max Financial Services Limited
+        "MAZDOCK.NS": 0.03,      # Mazagon Dock Shipbuilders Limited
+        "JKCEMENT.NS": 0.02,     # JK Cement Limited
+        "DIXON.NS": 0.02,        # Dixon Technologies (India) Limited
+        "SWIGGY.NS": 0.02,       # SWIGGY LIMITED
+        "PERSISTENT.NS": 0.02,   # PERSISTENT SYSTEMS LTD
+        "BHARTIHEXA.NS": 0.01,   # Bharti Hexacom Limited
+        "KAYNES.NS": 0.01,       # Kaynes Technology India Ltd.
+        "ACMESOLAR.NS": 0.01,    # ACME Solar Holdings Ltd.
+        "SUNDARMFIN.NS": 0.01,   # Sundaram Finance Limited
+        "ANTHEM.NS": 0.01,       # Anthem Biosciences Limited
+        "MAXHEALTH.NS": 0.01,    # Max Healthcare Institute Limited
+        "BIOCON.NS": 0.01,       # Biocon Limited
+        "ETERNAL.NS": 0.01,      # Eternal Limited
         }
     },
            "ICICI Midcap Fund": {
