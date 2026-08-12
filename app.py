@@ -23,7 +23,7 @@ funds = {
     # Excludes Treps and Net Current Assets (cash-equivalent lines, not equities).
     # Entries listed at 0.00% in the statement are omitted (no impact on NAV calc).
     "HSBC Midcap Fund": {
-        "nav": 535.81,
+        "nav": 537.35,
         "holdings": {
         "FEDERALBNK.NS": 4.91,   # The Federal Bank Limited
         "LENSKART.NS": 4.13,     # Lenskart Solutions Limited
@@ -100,7 +100,7 @@ funds = {
         }
     },
            "ICICI Midcap Fund": {
-        "nav": 391.08,
+        "nav": 391.03,
         # Updated to ICICI Prudential Midcap Fund's Monthly Portfolio
         # Statement as on July 31, 2026 (equity holdings only).
         "holdings": {
@@ -191,7 +191,7 @@ funds = {
     # confidently resolved on NSE. "Deepak Nitrite Ltd." (0.00%) is omitted
     # since it has no impact on the NAV calc.
     "Edelweiss Mid Cap Fund": {
-        "nav": 130.16,
+        "nav": 129.95,
         "holdings": {
             "FEDERALBNK.NS": 4.00,   # The Federal Bank Ltd.
             "BSE.NS": 2.33,          # BSE Ltd.
@@ -291,7 +291,7 @@ funds = {
     # Updated to HDFC Mutual Fund's Portfolio Statement
     # as on July 31, 2026 (equity holdings only; weights are "% to NAV").
     "HDFC Mid Cap Fund": {
-        "nav": 236.83,
+        "nav": 237.01,
         "holdings": {
             "FEDERALBNK.NS": 4.36,
             "AUBANK.NS": 3.96,
@@ -376,7 +376,7 @@ funds = {
     },
 
     "Invesco India Midcap Fund": {
-        "nav": 244.21,
+        "nav": 243.34,
         "holdings": {
             "BSE.NS": 6.05,
             "PRESTIGE.NS": 5.85,
@@ -426,7 +426,7 @@ funds = {
     # Updated to Motilal Oswal Mutual Fund's Monthly Portfolio Statement
     # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
     "Motilal Oswal Midcap Fund": {
-        "nav": 119.58,
+        "nav": 120.00,
         "holdings": {
             "KALYANKJIL.NS": 8.87,   # Kalyan Jewellers India Limited
             "PAYTM.NS": 8.08,        # One 97 Communications Limited
