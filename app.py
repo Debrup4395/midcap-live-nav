@@ -375,51 +375,55 @@ funds = {
         }
     },
 
+    # Updated to Invesco Mutual Fund's Monthly Portfolio Statement
+    # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
+    # Excludes TREPS/Reverse Repo and Net Receivables/(Payables) lines
+    # (cash-equivalents, not equities).
+    # "Manipal Health Enterprises Ltd" (0.51%) is omitted - it is an
+    # unlisted company and has no resolvable NSE ticker.
     "Invesco India Midcap Fund": {
         "nav": 243.34,
         "holdings": {
-            "BSE.NS": 6.05,
-            "PRESTIGE.NS": 5.85,
-            "FEDERALBNK.NS": 5.20,
-            "AUBANK.NS": 4.72,
-            "ETERNAL.NS": 4.48,
-            "MEDANTA.NS": 4.39,
-            "INDIGO.NS": 4.22,
-            "MAXHEALTH.NS": 4.08,
-            "LTF.NS": 3.90,
-            "INDUSINDBK.NS": 3.81,
-            "MFSL.NS": 3.59,
-            "GLENMARK.NS": 3.42,
-            "JKCEMENT.NS": 3.25,
-            "SAILIFE.NS": 3.20,
-            "SRF.NS": 3.09,
-            "TRENT.NS": 2.61,
-            "AMBER.NS": 2.51,
-            "ABB.NS": 2.49,
-            "HEXT.NS": 2.37,
-            "CPPLUS.NS": 2.37,
-            "SWIGGY.NS": 2.24,
-            "NYKAA.NS": 2.13,
-            "TORNTPOWER.NS": 1.93,
-            "ICICIGI.NS": 1.92,
-            "CHOLAHLDNG.NS": 1.45,
-            "DIXON.NS": 1.44,
-            "APARINDS.NS": 1.42,
-            "PHOENIXLTD.NS": 1.38,
-            "KIMS.NS": 1.19,
-            "CRAFTSMAN.NS": 1.06,
-            "ETHOSLTD.NS": 1.01,
-            "CORONA.NS": 0.95,
-            "DRAGARWQ.NS": 0.88,
-            "TIMKEN.NS": 0.80,
-            "BANSALWIRE.NS": 0.60,
-            "CARBORUNIV.NS": 0.51,
-            "MAXESTATES.NS": 0.48,
-            "WEWORK.NS": 0.42,
-            "SOBHA.NS": 0.42,
-            "SONATSOFTW.NS": 0.32,
-            "VMM.NS": 0.26,
-            "TIINDIA.NS": 0.17,
+            "PRESTIGE.NS": 7.16,     # Prestige Estates Projects Limited
+            "FEDERALBNK.NS": 6.42,   # The Federal Bank Limited
+            "MAXHEALTH.NS": 6.21,    # Max Healthcare Institute Limited
+            "MEESHO.NS": 4.64,       # Meesho Ltd
+            "MEDANTA.NS": 4.37,      # Global Health Limited
+            "AUBANK.NS": 4.22,       # AU Small Finance Bank Limited
+            "ETERNAL.NS": 4.18,      # Eternal Limited
+            "INDUSINDBK.NS": 4.06,   # IndusInd Bank Limited
+            "BSE.NS": 3.86,          # BSE Limited
+            "LTF.NS": 3.81,          # L&T Finance Limited
+            "INDIGO.NS": 3.76,       # InterGlobe Aviation Limited
+            "MFSL.NS": 3.16,         # Max Financial Services Limited
+            "SAILIFE.NS": 3.05,      # Sai Life Sciences Limited
+            "JKCEMENT.NS": 2.93,     # JK Cement Limited
+            "GLENMARK.NS": 2.83,     # Glenmark Pharmaceuticals Limited
+            "ABB.NS": 2.55,          # ABB India Limited
+            "SRF.NS": 2.51,          # SRF Limited
+            "CPPLUS.NS": 2.33,       # Aditya Infotech Limited
+            "NYKAA.NS": 2.28,        # FSN E-Commerce Ventures Limited
+            "TORNTPOWER.NS": 2.23,   # Torrent Power Limited
+            "TRENT.NS": 2.11,        # Trent Limited
+            "SWIGGY.NS": 2.08,       # Swiggy Limited
+            "AMBER.NS": 2.07,        # Amber Enterprises India Limited
+            "DIXON.NS": 1.48,        # Dixon Technologies (India) Limited
+            "ICICIGI.NS": 1.47,      # ICICI Lombard General Insurance Company Limited
+            "BHARATFORG.NS": 1.27,   # Bharat Forge Limited
+            "PHOENIXLTD.NS": 1.24,   # The Phoenix Mills Limited
+            "KIMS.NS": 1.06,         # Krishna Institute Of Medical Sciences Limited
+            "CORONA.NS": 1.00,       # Corona Remedies Limited
+            "CRAFTSMAN.NS": 0.97,    # Craftsman Automation Limited
+            "ETHOSLTD.NS": 0.92,     # Ethos Ltd.
+            "DRAGARWQ.NS": 0.73,     # Dr Agarwals Health Care Limited
+            "TIINDIA.NS": 0.68,      # Tube Investments Of India Limited
+            "TIMKEN.NS": 0.58,       # Timken India Limited
+            "BANSALWIRE.NS": 0.50,   # Bansal Wire Industries Limited
+            "CARBORUNIV.NS": 0.45,   # Carborundum Universal Limited
+            "WEWORK.NS": 0.44,       # Wework India Management Limited
+            "MAXESTATES.NS": 0.36,   # Max Estates Limited
+            "SONATSOFTW.NS": 0.33,   # Sonata Software Limited
+            "VMM.NS": 0.19,          # Vishal Mega Mart Limited
         }
     },
 
