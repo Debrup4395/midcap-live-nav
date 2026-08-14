@@ -541,7 +541,7 @@ funds = {
             "HINDPETRO.NS": 0.66,     # Hindustan Petroleum Corporation Limited
             "GODREJIND.NS": 0.66,     # Godrej Industries Limited
             "NH.NS": 0.65,            # Narayana Hrudayalaya Limited
-            "LEELA.NS": 0.65,         # Leela Palaces Hotels & Resorts Limited
+            "THELEELA.NS": 0.65,         # Leela Palaces Hotels & Resorts Limited
             "COLPAL.NS": 0.62,        # Colgate Palmolive Limited
             "M&MFIN.NS": 0.59,        # Mahindra & Mahindra Financial Services Limited
             "FIVESTAR.NS": 0.59,      # Five Star Business Finance Limited
