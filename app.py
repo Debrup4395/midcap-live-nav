@@ -599,7 +599,7 @@ funds = {
             "NEWGEN.NS": 0.08,        # Newgen Software Technologies Limited
             "BRIGADE.NS": 0.07,       # Brigade Enterprises Limited
             "ICICIPRULI.NS": 0.06,    # ICICI Prudential Life Insurance Company Limited
-            "NSDL.NS": 0.06,          # National Securities Depository Limited
+            "544467:BOM": 0.06,          # National Securities Depository Limited
             "SJS.NS": 0.06,           # S.J.S. Enterprises Limited
             "KARURVYSYA.NS": 0.06,    # Karur Vysya Bank Limited
             "AWFIS.NS": 0.05,         # Awfis Space Solutions Limited
