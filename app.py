@@ -463,6 +463,149 @@ funds = {
             "PWL.NS": 0.60,          # PhysicsWallah Limited
             "AUBANK.NS": 0.06,       # AU Small Finance Bank Limited
         }
+    },
+
+    # Updated to WhiteOak Capital Mutual Fund's Portfolio Statement
+    # as on July 31, 2026 (equity holdings only; weight used is the
+    # combined "% to Net Assets" column, i.e. cash equity + any futures
+    # overlay in the same stock).
+    # Excludes: Bank Nifty Index (derivative, not a stock), REITs
+    # (Nexus Select Trust, Embassy Office Parks REIT), InvITs (Vertis
+    # Infrastructure Trust), Treasury Bills, and Reverse Repo/TREPS
+    # (cash-equivalents, not equities).
+    # The following holdings are omitted because their NSE ticker could
+    # not be confidently resolved (avoiding the risk of mapping to the
+    # wrong listed company): Omnitech Engineering Ltd (0.31%), Travel
+    # Food Services Ltd (0.21%), Yash Highvoltage Ltd (0.19%), Epack
+    # Prefab Technologies Ltd (0.16%), Onemi Technology Solutions Ltd
+    # (0.14%), Indiqube Spaces Ltd (0.09%), Orkla India Ltd (0.09%),
+    # EMA Partners India Ltd (0.04%), Bharat Bijlee Ltd (0.04%), Aye
+    # Finance Ltd (0.04%), Carraro India Ltd (0.03%), Clean Max Enviro
+    # Energy Solutions Ltd (0.01%, unlisted), Juniper Green Energy Ltd
+    # (0.29%).
+    "WhiteOak Capital Midcap Fund": {
+        "nav": 23.66,
+        "holdings": {
+            "MFSL.NS": 3.11,          # Max Financial Services Limited
+            "BHARTIHEXA.NS": 2.90,    # Bharti Hexacom Limited
+            "FEDERALBNK.NS": 2.84,    # The Federal Bank Limited
+            "COFORGE.NS": 2.72,       # Coforge Limited
+            "LAURUSLABS.NS": 2.46,    # Laurus Labs Limited
+            "FORTIS.NS": 2.30,        # Fortis Healthcare Limited
+            "PERSISTENT.NS": 2.23,    # Persistent Systems Limited
+            "POLICYBZR.NS": 2.16,     # PB Fintech Limited
+            "PHOENIXLTD.NS": 2.12,    # The Phoenix Mills Limited
+            "VMM.NS": 2.01,           # Vishal Mega Mart Limited
+            "BHEL.NS": 1.81,          # Bharat Heavy Electricals Limited
+            "NAUKRI.NS": 1.77,        # Info Edge Limited
+            "OIL.NS": 1.74,           # Oil India Limited
+            "INDUSINDBK.NS": 1.68,    # IndusInd Bank Limited
+            "MARICO.NS": 1.67,        # Marico Limited
+            "360ONE.NS": 1.58,        # 360 One WAM Limited
+            "NAM-INDIA.NS": 1.56,     # Nippon Life India Asset Management Limited
+            "BERGEPAINT.NS": 1.55,    # Berger Paints Limited
+            "AIAENG.NS": 1.47,        # AIA Engineering Limited
+            "SONACOMS.NS": 1.37,      # Sona BLW Precision Forgings Limited
+            "KEI.NS": 1.37,           # KEI Industries Limited
+            "ALKEM.NS": 1.34,         # Alkem Laboratories Limited
+            "OFSS.NS": 1.33,          # Oracle Financial Services Software Limited
+            "MUTHOOTFIN.NS": 1.32,    # Muthoot Finance Limited
+            "NATIONALUM.NS": 1.28,    # National Aluminium Company Limited
+            "RECLTD.NS": 1.25,        # REC Limited
+            "IPCALAB.NS": 1.19,       # IPCA Laboratories Limited
+            "TIINDIA.NS": 1.17,       # Tube Investments of India Limited
+            "MAXHEALTH.NS": 1.16,     # Max Healthcare Institute Limited
+            "MOTILALOFS.NS": 1.11,    # Motilal Oswal Financial Services Limited
+            "ABCAPITAL.NS": 1.04,     # Aditya Birla Capital Limited
+            "GODREJPROP.NS": 1.02,    # Godrej Properties Limited
+            "BLUESTARCO.NS": 1.02,    # Blue Star Limited
+            "NYKAA.NS": 1.01,         # FSN E-Commerce Ventures Limited
+            "PAGEIND.NS": 0.98,       # Page Industries Limited
+            "LENSKART.NS": 0.93,      # Lenskart Solutions Limited
+            "JSWINFRA.NS": 0.91,      # JSW Infrastructure Ltd
+            "AADHARHFC.NS": 0.90,     # Aadhar Housing Finance Limited
+            "MANKIND.NS": 0.89,       # Mankind Pharma Limited
+            "JSL.NS": 0.88,           # Jindal Stainless Limited
+            "ABBOTINDIA.NS": 0.86,    # Abbott India Limited
+            "GLAND.NS": 0.85,         # Gland Pharma Limited
+            "POWERINDIA.NS": 0.83,    # Hitachi Energy India Limited
+            "GVT&D.NS": 0.83,         # GE Vernova T&D India Limited
+            "HEROMOTOCO.NS": 0.81,    # Hero MotoCorp Limited
+            "COROMANDEL.NS": 0.81,    # Coromandel International Limited
+            "CUMMINSIND.NS": 0.80,    # Cummins India Limited
+            "NAVINFLUOR.NS": 0.77,    # Navin Fluorine International Limited
+            "PETRONET.NS": 0.75,      # Petronet LNG Limited
+            "BANKINDIA.NS": 0.74,     # Bank of India
+            "MCX.NS": 0.74,           # Multi Commodity Exchange of India Limited
+            "AJANTPHARM.NS": 0.74,    # Ajanta Pharma Limited
+            "HINDPETRO.NS": 0.66,     # Hindustan Petroleum Corporation Limited
+            "GODREJIND.NS": 0.66,     # Godrej Industries Limited
+            "NH.NS": 0.65,            # Narayana Hrudayalaya Limited
+            "LEELA.NS": 0.65,         # Leela Palaces Hotels & Resorts Limited
+            "COLPAL.NS": 0.62,        # Colgate Palmolive Limited
+            "M&MFIN.NS": 0.59,        # Mahindra & Mahindra Financial Services Limited
+            "FIVESTAR.NS": 0.59,      # Five Star Business Finance Limited
+            "ATHERENERG.NS": 0.58,    # Ather Energy Limited
+            "GROWW.NS": 0.58,         # Billionbrains Garage Ventures Ltd
+            "AZAD.NS": 0.57,          # Azad Engineering Ltd
+            "INDIASHLTR.NS": 0.57,    # India Shelter Finance Corporation Limited
+            "CARERATING.NS": 0.55,    # CARE Ratings Limited
+            "KRN.NS": 0.55,           # KRN Heat Exchanger And Refrigeration Limited
+            "PAYTM.NS": 0.54,         # One 97 Communications Limited
+            "SAILIFE.NS": 0.48,       # Sai Life Sciences Limited
+            "NMDC.NS": 0.45,          # NMDC Limited
+            "ACUTAAS.NS": 0.45,       # Acutaas Chemicals Limited
+            "SUPREMEIND.NS": 0.43,    # Supreme Industries Limited
+            "IIFL.NS": 0.43,          # IIFL Finance Limited
+            "ABREL.NS": 0.42,         # Aditya Birla Real Estate Limited
+            "AJAXENGG.NS": 0.42,      # Ajax Engineering Limited
+            "CPPLUS.NS": 0.41,        # Aditya Infotech Limited
+            "PNBHOUSING.NS": 0.41,    # PNB Housing Finance Limited
+            "NEULANDLAB.NS": 0.41,    # Neuland Laboratories Limited
+            "SOUTHBANK.NS": 0.40,     # The South Indian Bank Limited
+            "POLYMED.NS": 0.39,       # Poly Medicure Limited
+            "TDPOWERSYS.NS": 0.39,    # TD Power Systems Limited
+            "DYNAMATECH.NS": 0.38,    # Dynamatic Technologies Limited
+            "ENDURANCE.NS": 0.36,     # Endurance Technologies Limited
+            "JSWCEMENT.NS": 0.36,     # JSW Cement Limited
+            "MANORAMA.NS": 0.33,      # Manorama Industries Limited
+            "CARTRADE.NS": 0.33,      # Cartrade Tech Limited
+            "ANTHEM.NS": 0.31,        # Anthem Biosciences Limited
+            "KIRLOSENG.NS": 0.31,     # Kirloskar Oil Engines Limited
+            "EUREKAFORB.NS": 0.30,    # Eureka Forbes Ltd
+            "TBOTEK.NS": 0.28,        # TBO Tek Limited
+            "SHILPAMED.NS": 0.26,     # Shilpa Medicare Limited
+            "IGIL.NS": 0.26,          # International Gemological Institute Limited
+            "CHOLAHLDNG.NS": 0.25,    # Cholamandalam Financial Holdings Limited
+            "REPCOHOME.NS": 0.25,     # Repco Home Finance Limited
+            "METROBRAND.NS": 0.24,    # Metro Brands Limited
+            "SOBHA.NS": 0.23,         # Sobha Limited
+            "DOMS.NS": 0.22,          # Doms Industries Limited
+            "GILLETTE.NS": 0.21,      # Gillette India Limited
+            "AUBANK.NS": 0.18,        # AU Small Finance Bank Limited
+            "INTELLECT.NS": 0.17,     # Intellect Design Arena Limited
+            "LEMONTREE.NS": 0.17,     # Lemon Tree Hotels Limited
+            "SAFARI.NS": 0.17,        # Safari Industries Limited
+            "UJJIVANSFB.NS": 0.15,    # Ujjivan Small Finance Bank Limited
+            "ICICIGI.NS": 0.15,       # ICICI Lombard General Insurance Company Limited
+            "AVALON.NS": 0.15,        # Avalon Technologies Limited
+            "3MINDIA.NS": 0.14,       # 3M India Limited
+            "KIMS.NS": 0.13,          # Krishna Institute Of Medical Sciences Limited
+            "SAGILITY.NS": 0.12,      # Sagility Limited
+            "AETHER.NS": 0.11,        # Aether Industries Limited
+            "PRUDENT.NS": 0.11,       # Prudent Corporate Advisory Services Limited
+            "FINEORG.NS": 0.09,       # Fine Organic Industries Limited
+            "XPROINDIA.NS": 0.08,     # Xpro India Limited
+            "NEWGEN.NS": 0.08,        # Newgen Software Technologies Limited
+            "BRIGADE.NS": 0.07,       # Brigade Enterprises Limited
+            "ICICIPRULI.NS": 0.06,    # ICICI Prudential Life Insurance Company Limited
+            "NSDL.NS": 0.06,          # National Securities Depository Limited
+            "SJS.NS": 0.06,           # S.J.S. Enterprises Limited
+            "KARURVYSYA.NS": 0.06,    # Karur Vysya Bank Limited
+            "AWFIS.NS": 0.05,         # Awfis Space Solutions Limited
+            "DIXON.NS": 0.04,         # Dixon Technologies Limited
+            "INDIGOPNTS.NS": 0.03,    # Indigo Paints Limited
+        }
     }
 }
 
