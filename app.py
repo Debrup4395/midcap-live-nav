@@ -3,6 +3,7 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime
 import pytz
+import concurrent.futures
 from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(
@@ -10,7 +11,9 @@ st.set_page_config(
     layout="wide"
 )
 
-st_autorefresh(interval=60000, key="refresh")
+REFRESH_SECONDS = 60
+
+st_autorefresh(interval=REFRESH_SECONDS * 1000, key="refresh")
 
 # =========================
 # FUND DATA
@@ -610,33 +613,41 @@ funds = {
 }
 
 # =========================
-# FETCH DATA (fast_info primary + batched-download fallback)
+# FETCH LIVE DATA (single batched, threaded, timed-out download)
 # =========================
 #
-# WHY THE OLD VERSION COULD SHOW WRONG PRICES / WRONG % CHANGE:
-# Both the "previous close" and the "latest close" used as a stand-in
-# for the live price came from the SAME single batched yf.download()
-# daily-bar table, via close.iloc[-2] / close.iloc[-1]. That sounds
-# internally consistent, but early in the trading session Yahoo's
-# daily bar for TODAY often doesn't exist yet in that download
-# response. When that happens, iloc[-1] silently becomes YESTERDAY's
-# close (not live) and iloc[-2] becomes the close from TWO days ago --
-# both numbers are stale, and the resulting "% change" can be wrong,
-# sometimes even the wrong direction.
+# WHY THE PREVIOUS VERSION STILL SHOWED WRONG PRICES:
+# It fetched each of the ~150 tickers with its own yf.Ticker(ticker)
+# .fast_info call, one at a time, with no batching and no timeout.
+# That's the exact anti-pattern that caused the original Invesco
+# tracker to freeze: a single slow/unresponsive ticker stalls that
+# call, there's nothing to time it out, and Yahoo tends to throttle an
+# app IP that fires ~150 unbatched requests every refresh. When a call
+# failed or hung, its 300s-cached slot just kept serving whatever
+# (possibly nothing, possibly an old value) it had -- with no check on
+# how fresh that value actually was.
 #
-# FIX: for each ticker, pull BOTH previous close and live price from a
-# single fast_info snapshot -- fast_info.previous_close is Yahoo's own
-# live "last completed session" reference price and fast_info.last_price
-# is the true current quote, so the two numbers can never desync from
-# each other the way two daily bars pulled at different times could.
-# The batched daily-bar download is kept as a fallback (and still
-# powers the "skipped holdings" diagnostics), used only for tickers
-# where fast_info comes back empty.
-#
-# Because this file spans ~150 unique tickers across 6 funds, fast_info
-# calls are cached per-ticker for the same duration as the fallback
-# batch (ttl=300s) so a 60s auto-refresh doesn't re-hit Yahoo for every
-# single symbol on every rerun.
+# FIX (same pattern used to fix the Invesco tracker):
+#  1. ONE batched, multi-threaded yf.download() call fetches all ~150
+#     tickers' recent daily bars together, instead of 150 separate
+#     blocking fast_info calls.
+#  2. That call is wrapped with a hard timeout, so an unresponsive
+#     Yahoo response doesn't hang the whole app.
+#  3. For each ticker, the most recent valid Close is checked against
+#     TODAY'S date. If the newest data point available is older than
+#     STALE_DATA_MAX_DAYS, it's treated as a failed fetch for this
+#     ticker rather than displayed/used as if it were current -- this
+#     is what actually prevents "wrong price" (a stale close silently
+#     standing in for a live one).
+#  4. Tickers with no fresh data this cycle reuse their last known
+#     good (previous_close, latest_close, as-of date) from
+#     st.session_state, instead of being skipped or showing 0/garbage.
+
+FETCH_TIMEOUT_SECONDS = 25
+STALE_DATA_MAX_DAYS = 4
+
+if "last_good_quotes" not in st.session_state:
+    st.session_state["last_good_quotes"] = {}
 
 all_tickers = []
 
@@ -646,49 +657,89 @@ for fund in funds.values():
 all_tickers = list(set(all_tickers))
 
 
-@st.cache_data(ttl=300)
-def fetch_data(tickers):
-    """Fallback-only daily bar data, used solely when fast_info fails
-    for a given ticker (and to power the 'skipped holdings' diagnostics
-    for symbols that fail on both sources)."""
-    data = yf.download(
+def _download_batch(tickers):
+    """Runs in a worker thread; wrapped with a timeout by the caller."""
+    return yf.download(
         tickers=tickers,
         period="10d",
         interval="1d",
-        auto_adjust=True,
-        progress=False,
         group_by="ticker",
-        threads=False
+        threads=True,
+        progress=False,
+        auto_adjust=False,
     )
 
-    return data
 
-
-@st.cache_data(ttl=300)
-def get_quote(ticker):
-    """Primary source: previous close AND live price from the SAME
-    live-quote snapshot, so they can never desync from each other."""
+@st.cache_data(ttl=REFRESH_SECONDS, show_spinner=False)
+def fetch_all_prices(tickers):
+    """One batched, threaded call for ALL tickers, with a hard timeout.
+    Returns a DataFrame (possibly empty if the fetch failed/timed out)."""
     try:
-        fi = yf.Ticker(ticker).fast_info
-        live_price = fi.get("last_price") or fi.get("lastPrice")
-        prev_close = (
-            fi.get("previous_close")
-            or fi.get("previousClose")
-            or fi.get("regular_market_previous_close")
-        )
-        if live_price and prev_close:
-            return float(prev_close), float(live_price)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+            future = ex.submit(_download_batch, tickers)
+            return future.result(timeout=FETCH_TIMEOUT_SECONDS)
+    except concurrent.futures.TimeoutError:
+        return pd.DataFrame()
     except Exception:
-        pass
-    return None, None
+        return pd.DataFrame()
 
 
-try:
-    data = fetch_data(all_tickers)
+def get_quote_from_batch(ticker, batch_data, as_of_today, n_tickers):
+    """Pull (previous_close, live_price, as_of_date) for one ticker out
+    of the already-fetched batch DataFrame.
 
-except Exception as e:
-    st.error(f"Error fetching data: {e}")
-    st.stop()
+    Returns (None, None, None) if there's no usable data OR the
+    freshest data point available is older than STALE_DATA_MAX_DAYS --
+    callers should treat that the same as a failed fetch and fall back
+    to a cached quote."""
+    try:
+        if n_tickers == 1:
+            if "Close" not in batch_data.columns:
+                return None, None, None
+            hist = batch_data["Close"].dropna()
+        else:
+            if ticker not in batch_data.columns.get_level_values(0):
+                return None, None, None
+            hist = batch_data[ticker]["Close"].dropna()
+
+        if len(hist) == 0:
+            return None, None, None
+
+        latest_date = hist.index[-1].date()
+        age_days = (as_of_today - latest_date).days
+
+        if age_days > STALE_DATA_MAX_DAYS:
+            return None, None, None
+
+        if len(hist) >= 2:
+            prev = float(hist.iloc[-2])
+            live = float(hist.iloc[-1])
+        else:
+            prev = live = float(hist.iloc[-1])
+
+        if prev == 0:
+            return None, None, None
+
+        return prev, live, latest_date
+
+    except Exception:
+        return None, None, None
+
+
+india = pytz.timezone("Asia/Kolkata")
+now_india = datetime.now(india)
+today_india_date = now_india.date()
+
+batch_data = fetch_all_prices(all_tickers)
+fetch_failed = batch_data is None or batch_data.empty
+
+if fetch_failed:
+    st.warning(
+        "⚠️ Couldn't reach Yahoo Finance this refresh "
+        f"(timed out after {FETCH_TIMEOUT_SECONDS}s or request failed). "
+        "Showing last known values where available.",
+        icon="⚠️",
+    )
 
 # =========================
 # TITLE
@@ -696,39 +747,18 @@ except Exception as e:
 
 st.title("📈 Live Midcap Fund NAV Tracker")
 
-india = pytz.timezone("Asia/Kolkata")
-
-current_time = datetime.now(india).strftime("%d-%m-%Y %I:%M:%S %p")
+current_time = now_india.strftime("%d-%m-%Y %I:%M:%S %p")
 
 st.write(f"Last Updated: {current_time}")
 
 # =========================
-# HELPER: SAFE PRICE EXTRACTION (fallback path only)
-# =========================
-
-def get_close_series(data, ticker, all_tickers):
-    """
-    Fallback-only helper. Return the Close price series for a ticker,
-    handling both the multi-ticker (MultiIndex) and single-ticker
-    column layouts that yf.download can return. Only used when
-    fast_info didn't return a usable quote for this ticker.
-    """
-    if len(all_tickers) == 1:
-        if "Close" not in data.columns:
-            raise KeyError(f"No Close column for {ticker}")
-        return data["Close"].dropna()
-
-    if ticker not in data.columns.get_level_values(0):
-        raise KeyError(f"{ticker} not present in downloaded data")
-
-    close = data[ticker]["Close"].dropna()
-    return close
-
-
-# =========================
 # NAV CALCULATION
 # =========================
+
 fund_performance = []
+n_tickers = len(all_tickers)
+stale_this_cycle = set()
+
 for fund_name, fund_data in funds.items():
 
     previous_nav = fund_data["nav"]
@@ -740,50 +770,42 @@ for fund_name, fund_data in funds.items():
 
     for ticker, weight in holdings.items():
 
-        try:
-            # PRIMARY: single consistent snapshot from fast_info
-            previous_close, latest_close = get_quote(ticker)
+        previous_close, latest_close, as_of_date = (None, None, None)
 
-            if previous_close is None or latest_close is None:
-                # FALLBACK: last COMPLETE daily bar pair from the
-                # batched download, only used if fast_info failed
-                close = get_close_series(data, ticker, all_tickers)
+        if not fetch_failed:
+            previous_close, latest_close, as_of_date = get_quote_from_batch(
+                ticker, batch_data, today_india_date, n_tickers
+            )
 
-                if len(close) < 2:
-                    skipped.append((ticker, weight, "Insufficient price history (newly listed / no prior close)"))
-                    continue
-
-                latest_close = float(close.iloc[-1])
-                previous_close = float(close.iloc[-2])
-
-            if previous_close == 0 or pd.isna(previous_close) or pd.isna(latest_close):
-                skipped.append((ticker, weight, "Invalid/zero close price"))
+        if previous_close is not None and latest_close is not None:
+            # Fresh, trustworthy data this cycle -> remember it
+            st.session_state["last_good_quotes"][ticker] = (
+                previous_close, latest_close, as_of_date
+            )
+        else:
+            # No fresh/trustworthy data this cycle -> fall back to the
+            # last known good quote for this ticker, if any
+            cached = st.session_state["last_good_quotes"].get(ticker)
+            if cached is not None:
+                previous_close, latest_close, as_of_date = cached
+                stale_this_cycle.add(ticker)
+            else:
+                skipped.append((ticker, weight, "No fresh or cached price available yet"))
                 continue
 
-            change_percent = (
-                (latest_close - previous_close)
-                / previous_close
-            ) * 100
+        change_percent = (
+            (latest_close - previous_close) / previous_close
+        ) * 100
 
-            contribution = (
-                weight / 100
-            ) * change_percent
+        contribution = (weight / 100) * change_percent
+        weighted_return += contribution
 
-            weighted_return += contribution
-
-            stock_rows.append({
-                "Stock": ticker,
-                "Weight %": round(weight, 2),
-                "Price Change %": round(change_percent, 2),
-                "Contribution": round(contribution, 3)
-            })
-
-        except KeyError:
-            skipped.append((ticker, weight, "Ticker not found in yfinance data (check symbol / possibly delisted)"))
-        except IndexError:
-            skipped.append((ticker, weight, "Not enough trading days available (likely a recent listing)"))
-        except Exception as e:
-            skipped.append((ticker, weight, f"Unexpected error: {e}"))
+        stock_rows.append({
+            "Stock": ticker,
+            "Weight %": round(weight, 2),
+            "Price Change %": round(change_percent, 2),
+            "Contribution": round(contribution, 3)
+        })
 
     expected_nav = previous_nav * (
         1 + weighted_return / 100
@@ -848,9 +870,23 @@ for fund_name, fund_data in funds.items():
                 skipped, columns=["Stock", "Weight %", "Reason"]
             ).sort_values(by="Weight %", ascending=False)
             st.dataframe(
-    skipped_df,
-    width="stretch"
-)
+                skipped_df,
+                width="stretch"
+            )
+
+# =====================================================
+# DATA FRESHNESS NOTICE
+# =====================================================
+
+if stale_this_cycle:
+    sample = ", ".join(sorted(stale_this_cycle)[:8])
+    more = f" +{len(stale_this_cycle) - 8} more" if len(stale_this_cycle) > 8 else ""
+    st.markdown("---")
+    st.info(
+        f"ℹ️ {len(stale_this_cycle)} ticker(s) had no data fresher than "
+        f"{STALE_DATA_MAX_DAYS} days this refresh and are showing their "
+        f"last known good quote instead: {sample}{more}"
+    )
 
 # =====================================================
 # BEST & WORST FUND
