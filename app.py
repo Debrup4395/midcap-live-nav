@@ -26,7 +26,7 @@ funds = {
     # Excludes Treps and Net Current Assets (cash-equivalent lines, not equities).
     # Entries listed at 0.00% in the statement are omitted (no impact on NAV calc).
     "HSBC Midcap Fund": {
-        "nav": 547.83,
+        "nav": 547.80,
         "holdings": {
         "FEDERALBNK.NS": 4.91,   # The Federal Bank Limited
         "LENSKART.NS": 4.13,     # Lenskart Solutions Limited
@@ -103,7 +103,7 @@ funds = {
         }
     },
            "ICICI Midcap Fund": {
-        "nav": 399.30,
+        "nav": 394.22,
         # Updated to ICICI Prudential Midcap Fund's Monthly Portfolio
         # Statement as on July 31, 2026 (equity holdings only).
         "holdings": {
@@ -194,7 +194,7 @@ funds = {
     # confidently resolved on NSE. "Deepak Nitrite Ltd." (0.00%) is omitted
     # since it has no impact on the NAV calc.
     "Edelweiss Mid Cap Fund": {
-        "nav": 131.38,
+        "nav": 130.50,
         "holdings": {
             "FEDERALBNK.NS": 4.00,   # The Federal Bank Ltd.
             "BSE.NS": 2.33,          # BSE Ltd.
@@ -294,7 +294,7 @@ funds = {
     # Updated to HDFC Mutual Fund's Portfolio Statement
     # as on July 31, 2026 (equity holdings only; weights are "% to NAV").
     "HDFC Mid Cap Fund": {
-        "nav": 237.07,
+        "nav": 236.39,
         "holdings": {
             "FEDERALBNK.NS": 4.36,
             "AUBANK.NS": 3.96,
@@ -385,7 +385,7 @@ funds = {
     # "Manipal Health Enterprises Ltd" (0.51%) is omitted - it is an
     # unlisted company and has no resolvable NSE ticker.
     "Invesco India Midcap Fund": {
-        "nav": 245.07,
+        "nav": 242.97,
         "holdings": {
             "PRESTIGE.NS": 7.16,     # Prestige Estates Projects Limited
             "FEDERALBNK.NS": 6.42,   # The Federal Bank Limited
@@ -433,7 +433,7 @@ funds = {
     # Updated to Motilal Oswal Mutual Fund's Monthly Portfolio Statement
     # as on July 31, 2026 (equity holdings only; weights are "% to Net Assets").
     "Motilal Oswal Midcap Fund": {
-        "nav": 122.78,
+        "nav": 120.45,
         "holdings": {
             "KALYANKJIL.NS": 8.87,   # Kalyan Jewellers India Limited
             "PAYTM.NS": 8.08,        # One 97 Communications Limited
@@ -487,7 +487,7 @@ funds = {
     # Energy Solutions Ltd (0.01%, unlisted), Juniper Green Energy Ltd
     # (0.29%).
     "WhiteOak Capital Midcap Fund": {
-        "nav": 23.90,
+        "nav": 23.71,
         "holdings": {
             "MFSL.NS": 3.11,          # Max Financial Services Limited
             "BHARTIHEXA.NS": 2.90,    # Bharti Hexacom Limited
