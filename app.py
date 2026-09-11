@@ -193,7 +193,7 @@ funds = {
         "ASTEC.NS": 0.01,        # Astec LifeSciences Ltd.
         "CAMLINFINE.NS": 0.01,   # Camlin Fine Sciences Ltd.
         "CHEMPLASTS.NS": 0.01,   # Chemplast Sanmar Ltd
-        "GUJGASLTD.NS": 0.01,    # Gujarat Gas Ltd
+        "GUJGASLTD.BO": 0.01,    # Gujarat Gas Ltd
         }
     },
 
