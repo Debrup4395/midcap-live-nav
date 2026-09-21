@@ -1,6 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
+import requests
 from datetime import datetime
 import pytz
 import concurrent.futures
@@ -628,130 +629,443 @@ funds = {
 }
 
 # =========================
-# FETCH LIVE DATA (single batched, threaded, timed-out download)
+# FETCH LIVE DATA
 # =========================
 #
-# WHY THE PREVIOUS VERSION STILL SHOWED WRONG PRICES:
-# It fetched each of the ~150 tickers with its own yf.Ticker(ticker)
-# .fast_info call, one at a time, with no batching and no timeout.
-# That's the exact anti-pattern that caused the original Invesco
-# tracker to freeze: a single slow/unresponsive ticker stalls that
-# call, there's nothing to time it out, and Yahoo tends to throttle an
-# app IP that fires ~150 unbatched requests every refresh. When a call
-# failed or hung, its 300s-cached slot just kept serving whatever
-# (possibly nothing, possibly an old value) it had -- with no check on
-# how fresh that value actually was.
+# WHY PRICES WERE STILL WRONG:
 #
-# FIX (same pattern used to fix the Invesco tracker):
-#  1. ONE batched, multi-threaded yf.download() call fetches all ~150
-#     tickers' recent daily bars together, instead of 150 separate
-#     blocking fast_info calls.
-#  2. That call is wrapped with a hard timeout, so an unresponsive
-#     Yahoo response doesn't hang the whole app.
-#  3. For each ticker, the most recent valid Close is checked against
-#     TODAY'S date. If the newest data point available is older than
-#     STALE_DATA_MAX_DAYS, it's treated as a failed fetch for this
-#     ticker rather than displayed/used as if it were current -- this
-#     is what actually prevents "wrong price" (a stale close silently
-#     standing in for a live one).
-#  4. Tickers with no fresh data this cycle reuse their last known
-#     good (previous_close, latest_close, as-of date) from
-#     st.session_state, instead of being skipped or showing 0/garbage.
+# The whole app was built on ONE batched yf.download(period="10d",
+# interval="1d") call, then "previous_close = iloc[-2], live_price =
+# iloc[-1]" off those DAILY bars. Daily bars are not a live quote --
+# during market hours, .NS/.BO daily candles are frequently not
+# updated intraday, so iloc[-1] can silently be an OLD close instead
+# of the current traded price, and iloc[-2] shifts along with it. That
+# is the exact bug already found and fixed in the sister Invesco and
+# Motilal trackers: no true live-price source was ever being queried
+# here, only end-of-day candles.
+#
+# FIX -- same 3-tier design proven on those trackers, generalised to
+# ~150 tickers across 7 funds and to both .NS and .BO tickers:
+#
+#   Tier 1 (primary, .NS only):  NSE's own quote API -- previousClose
+#                                and lastPrice straight from the
+#                                exchange, authoritative, not derived.
+#   Tier 2 (secondary, .NS + .BO): Yahoo's CHART API meta block
+#                                (chartPreviousClose / regularMarket-
+#                                Price) -- values Yahoo states
+#                                directly. Deliberately NOT yfinance's
+#                                fast_info, whose previousClose is
+#                                derived client-side from grouped
+#                                hourly bars and was the exact cause of
+#                                wrong previous-closes on the sister
+#                                Invesco tracker (e.g. FEDERALBNK
+#                                334.50 shown vs. the real 332.75).
+#   Tier 3 (last resort):       batched daily + intraday candle
+#                                history, with the "is the last daily
+#                                bar today's in-progress session"
+#                                question answered by comparing
+#                                yfinance's OWN daily-bar date against
+#                                yfinance's OWN intraday-bar date (same
+#                                source/normalisation), never against a
+#                                separately-computed Python-clock date.
+#
+# All three tiers are fetched CONCURRENTLY across every ticker, each
+# bounded by its own hard timeout, and the quote lookup used by the
+# per-fund loop below does ZERO network I/O -- it only reads a
+# pre-built quote_map. A ticker with no fresh/trustworthy data this
+# cycle falls back to its last known good quote in st.session_state,
+# same as before.
 
-FETCH_TIMEOUT_SECONDS = 25
-STALE_DATA_MAX_DAYS = 4
+NSE_REQUEST_TIMEOUT = 5     # per-request timeout, seconds
+NSE_BATCH_TIMEOUT = 35      # hard ceiling for ALL NSE requests combined (~150 tickers)
+YF_BATCH_TIMEOUT = 30       # hard ceiling for each batched Yahoo call
+STALE_DATA_MAX_DAYS = 4     # Tier-3 candle data older than this is treated as a failed fetch
 
 if "last_good_quotes" not in st.session_state:
+    # {ticker: (previous_close, latest_close, as_of_date, source)}
     st.session_state["last_good_quotes"] = {}
 
-all_tickers = []
+if "nse_session" not in st.session_state:
+    st.session_state["nse_session"] = None
 
+all_tickers = []
 for fund in funds.values():
     all_tickers.extend(list(fund["holdings"].keys()))
+all_tickers = sorted(set(all_tickers))
 
-all_tickers = list(set(all_tickers))
+# NSE's quote API only serves NSE (.NS) listings, so only that subset
+# is eligible for Tier 1. .BO-only tickers (GUJGASLTD, NSDL) go
+# straight to Tier 2, which handles both exchanges fine.
+nse_eligible_symbols = [t[:-3] for t in all_tickers if t.endswith(".NS")]
+
+NSE_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.nseindia.com/get-quotes/equity",
+}
+
+YF_CHART_URL = "https://query2.finance.yahoo.com/v8/finance/chart/{ticker}"
+
+YF_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json,text/plain,*/*",
+}
 
 
-def _download_batch(tickers):
-    """Runs in a worker thread; wrapped with a timeout by the caller."""
-    return yf.download(
-        tickers=tickers,
-        period="10d",
-        interval="1d",
-        group_by="ticker",
-        threads=True,
-        progress=False,
-        auto_adjust=False,
-    )
+def get_nse_session():
+    """Reuse one requests.Session across reruns so we don't re-negotiate
+    NSE's anti-bot cookies on every refresh."""
+    session = st.session_state.get("nse_session")
+    if session is None:
+        session = requests.Session()
+        session.headers.update(NSE_HEADERS)
+        try:
+            session.get("https://www.nseindia.com", timeout=NSE_REQUEST_TIMEOUT)
+        except Exception:
+            pass
+        st.session_state["nse_session"] = session
+    return session
+
+
+def _fetch_one_nse(symbol, session):
+    """Single-symbol NSE fetch. Called from a thread pool, never
+    directly from the main loop. `symbol` has no .NS suffix."""
+    url = f"https://www.nseindia.com/api/quote-equity?symbol={symbol}"
+    try:
+        resp = session.get(url, timeout=NSE_REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            resp = session.get(url, timeout=NSE_REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            return symbol, None, None, f"HTTP {resp.status_code}"
+        data = resp.json()
+        price_info = data.get("priceInfo", {})
+        live_price = price_info.get("lastPrice")
+        prev_close = price_info.get("previousClose")
+        if live_price and prev_close:
+            return symbol, float(prev_close), float(live_price), None
+        return symbol, None, None, "missing priceInfo fields (likely bot-blocked page)"
+    except ValueError:
+        return symbol, None, None, "non-JSON response (likely bot-block HTML page)"
+    except requests.exceptions.Timeout:
+        return symbol, None, None, "timeout"
+    except Exception as e:
+        return symbol, None, None, f"{type(e).__name__}"
 
 
 @st.cache_data(ttl=REFRESH_SECONDS, show_spinner=False)
-def fetch_all_prices(tickers):
-    """One batched, threaded call for ALL tickers, with a hard timeout.
-    Returns a DataFrame (possibly empty if the fetch failed/timed out)."""
+def fetch_nse_batch(symbols):
+    """PRIMARY source (.NS only). Fetches all eligible symbols
+    concurrently, bounded by ONE overall timeout."""
+    session = get_nse_session()
+    results = {}
+    errors = {}
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
+        futures = {ex.submit(_fetch_one_nse, s, session): s for s in symbols}
+        try:
+            for fut in concurrent.futures.as_completed(futures, timeout=NSE_BATCH_TIMEOUT):
+                s = futures[fut]
+                try:
+                    _, prev_close, live_price, err = fut.result()
+                except Exception as e:
+                    prev_close, live_price, err = None, None, str(e)
+                results[s] = (prev_close, live_price)
+                if err:
+                    errors[s] = err
+        except concurrent.futures.TimeoutError:
+            for fut, s in futures.items():
+                if s not in results:
+                    results[s] = (None, None)
+                    errors[s] = "timeout (overall NSE batch)"
+
+    return results, errors
+
+
+def _fetch_one_yf_chart(ticker):
+    """TIER 2 -- Yahoo's chart-API meta block. `ticker` includes its
+    .NS/.BO suffix, matching what's used everywhere else.
+
+    Deliberately NOT yfinance's fast_info: fast_info.previousClose is
+    derived client-side from grouped hourly bars and was proven to
+    return the wrong session's close for NSE tickers (see FEDERALBNK
+    on the Invesco tracker: showed 334.50, real value 332.75). The
+    chart endpoint's `meta.chartPreviousClose` and
+    `meta.regularMarketPrice` are values Yahoo computes and states
+    directly, with no client-side reconciliation."""
+    try:
+        resp = requests.get(
+            YF_CHART_URL.format(ticker=ticker),
+            params={"range": "1d", "interval": "1m"},
+            headers=YF_HEADERS,
+            timeout=NSE_REQUEST_TIMEOUT,
+        )
+        if resp.status_code != 200:
+            return ticker, None, None, f"HTTP {resp.status_code}"
+
+        payload = resp.json()
+        result = (payload.get("chart", {}).get("result") or [None])[0]
+        if not result:
+            err = payload.get("chart", {}).get("error")
+            return ticker, None, None, f"no result ({err})"
+
+        meta = result.get("meta", {})
+        prev_close = meta.get("chartPreviousClose") or meta.get("previousClose")
+        live_price = meta.get("regularMarketPrice")
+
+        if live_price is None:
+            # Market closed / field absent -> last non-null 1-minute
+            # close from the SAME payload (no cross-source mixing).
+            try:
+                closes = result["indicators"]["quote"][0]["close"]
+                for c in reversed(closes):
+                    if c is not None:
+                        live_price = c
+                        break
+            except Exception:
+                pass
+
+        if prev_close and live_price:
+            return ticker, float(prev_close), float(live_price), None
+        return ticker, None, None, "missing chart meta fields"
+
+    except ValueError:
+        return ticker, None, None, "non-JSON response"
+    except requests.exceptions.Timeout:
+        return ticker, None, None, "timeout"
+    except Exception as e:
+        return ticker, None, None, f"{type(e).__name__}"
+
+
+@st.cache_data(ttl=REFRESH_SECONDS, show_spinner=False)
+def fetch_yf_chart_batch(tickers):
+    """TIER 2 (secondary) source, used when NSE fails or for .BO
+    tickers NSE can't serve at all. Fetches all tickers concurrently,
+    bounded by ONE overall timeout."""
+    results = {}
+    errors = {}
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
+        futures = {ex.submit(_fetch_one_yf_chart, t): t for t in tickers}
+        try:
+            for fut in concurrent.futures.as_completed(futures, timeout=YF_BATCH_TIMEOUT):
+                t = futures[fut]
+                try:
+                    _, prev_close, live_price, err = fut.result()
+                except Exception as e:
+                    prev_close, live_price, err = None, None, str(e)
+                results[t] = (prev_close, live_price)
+                if err:
+                    errors[t] = err
+        except concurrent.futures.TimeoutError:
+            for fut, t in futures.items():
+                if t not in results:
+                    results[t] = (None, None)
+                    errors[t] = "timeout (overall Yahoo chart batch)"
+
+    return results, errors
+
+
+def _download_with_timeout(kwargs, timeout_seconds):
+    """Runs a yf.download() call in a worker thread with a hard
+    timeout, since yfinance itself sets none."""
     try:
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
-            future = ex.submit(_download_batch, tickers)
-            return future.result(timeout=FETCH_TIMEOUT_SECONDS)
+            future = ex.submit(lambda: yf.download(**kwargs))
+            return future.result(timeout=timeout_seconds)
     except concurrent.futures.TimeoutError:
         return pd.DataFrame()
     except Exception:
         return pd.DataFrame()
 
 
-def get_quote_from_batch(ticker, batch_data, as_of_today, n_tickers):
-    """Pull (previous_close, live_price, as_of_date) for one ticker out
-    of the already-fetched batch DataFrame.
+@st.cache_data(ttl=REFRESH_SECONDS, show_spinner=False)
+def fetch_daily_batch(tickers):
+    """TIER 3 (last-resort) previous-close source: ONE batched,
+    threaded call for ALL tickers' recent daily bars."""
+    return _download_with_timeout(
+        dict(
+            tickers=tickers,
+            period="10d",
+            interval="1d",
+            group_by="ticker",
+            threads=True,
+            progress=False,
+            auto_adjust=False,
+        ),
+        YF_BATCH_TIMEOUT,
+    )
 
-    Returns (None, None, None) if there's no usable data OR the
-    freshest data point available is older than STALE_DATA_MAX_DAYS --
-    callers should treat that the same as a failed fetch and fall back
-    to a cached quote."""
+
+@st.cache_data(ttl=REFRESH_SECONDS, show_spinner=False)
+def fetch_intraday_batch(tickers):
+    """TIER 3 live-price source: ONE batched, threaded call for ALL
+    tickers' 1-minute intraday bars."""
+    return _download_with_timeout(
+        dict(
+            tickers=tickers,
+            period="1d",
+            interval="1m",
+            group_by="ticker",
+            threads=True,
+            progress=False,
+            auto_adjust=False,
+        ),
+        YF_BATCH_TIMEOUT,
+    )
+
+
+def _extract_close_series(ticker, batch_data, n_tickers):
+    if batch_data is None or batch_data.empty:
+        return None
     try:
         if n_tickers == 1:
             if "Close" not in batch_data.columns:
-                return None, None, None
-            hist = batch_data["Close"].dropna()
-        else:
-            if ticker not in batch_data.columns.get_level_values(0):
-                return None, None, None
-            hist = batch_data[ticker]["Close"].dropna()
-
-        if len(hist) == 0:
-            return None, None, None
-
-        latest_date = hist.index[-1].date()
-        age_days = (as_of_today - latest_date).days
-
-        if age_days > STALE_DATA_MAX_DAYS:
-            return None, None, None
-
-        if len(hist) >= 2:
-            prev = float(hist.iloc[-2])
-            live = float(hist.iloc[-1])
-        else:
-            prev = live = float(hist.iloc[-1])
-
-        if prev == 0:
-            return None, None, None
-
-        return prev, live, latest_date
-
+                return None
+            return batch_data["Close"].dropna()
+        if ticker not in batch_data.columns.get_level_values(0):
+            return None
+        return batch_data[ticker]["Close"].dropna()
     except Exception:
-        return None, None, None
+        return None
+
+
+def get_prev_close_from_daily(ticker, daily_batch, intraday_batch, n_tickers, today_date):
+    """Tier-3 previous close, derived the same day-matched way as the
+    fixed Motilal/Invesco trackers: compare the daily batch's OWN last
+    bar date against the intraday batch's OWN last bar date (same
+    source/normalisation), rather than against a separately-computed
+    Python-clock date, since those two can silently disagree."""
+    daily_hist = _extract_close_series(ticker, daily_batch, n_tickers)
+    if daily_hist is None or daily_hist.empty:
+        return None
+
+    last_daily_date = pd.Timestamp(daily_hist.index[-1]).date()
+
+    if (today_date - last_daily_date).days > STALE_DATA_MAX_DAYS:
+        return None
+
+    intraday_hist = _extract_close_series(ticker, intraday_batch, n_tickers)
+    intraday_last_date = None
+    if intraday_hist is not None and len(intraday_hist) >= 1:
+        intraday_last_date = pd.Timestamp(intraday_hist.index[-1]).date()
+
+    if intraday_last_date is not None and last_daily_date == intraday_last_date:
+        # Last daily row is today's in-progress session -> drop it.
+        if len(daily_hist) >= 2:
+            return float(daily_hist.iloc[-2])
+        return None
+
+    return float(daily_hist.iloc[-1])
+
+
+def get_live_price_from_intraday(ticker, intraday_batch, daily_batch, n_tickers):
+    """Tier-3 live price = most recent 1-minute close. Falls back to
+    the daily batch's last close if intraday data is unavailable (e.g.
+    market closed)."""
+    hist = _extract_close_series(ticker, intraday_batch, n_tickers)
+    if hist is not None and len(hist) >= 1:
+        return float(hist.iloc[-1])
+    hist = _extract_close_series(ticker, daily_batch, n_tickers)
+    if hist is not None and len(hist) >= 1:
+        return float(hist.iloc[-1])
+    return None
 
 
 india = pytz.timezone("Asia/Kolkata")
 now_india = datetime.now(india)
 today_india_date = now_india.date()
 
-batch_data = fetch_all_prices(all_tickers)
-fetch_failed = batch_data is None or batch_data.empty
+# --- Fetch all three tiers ONCE, up front, each bounded by its own
+# --- hard timeout. Building quote_map below does NO network I/O.
+
+nse_results, nse_errors = fetch_nse_batch(tuple(nse_eligible_symbols))
+
+need_tier2 = any(
+    t.endswith(".NS")
+    and (
+        nse_results.get(t[:-3], (None, None))[0] is None
+        or nse_results.get(t[:-3], (None, None))[1] is None
+    )
+    or not t.endswith(".NS")
+    for t in all_tickers
+)
+
+yf_chart_results, yf_chart_errors = (
+    fetch_yf_chart_batch(tuple(all_tickers)) if need_tier2 else ({}, {})
+)
+
+
+def _tier2_ok(t):
+    p, l = yf_chart_results.get(t, (None, None))
+    return p is not None and l is not None
+
+
+need_tier3 = any(
+    not (t.endswith(".NS") and nse_results.get(t[:-3], (None, None))[0] is not None
+         and nse_results.get(t[:-3], (None, None))[1] is not None)
+    and not _tier2_ok(t)
+    for t in all_tickers
+)
+
+daily_batch = fetch_daily_batch(tuple(all_tickers)) if need_tier3 else None
+intraday_batch = fetch_intraday_batch(tuple(all_tickers)) if need_tier3 else None
+n_tickers = len(all_tickers)
+
+quote_map = {}
+
+for ticker in all_tickers:
+
+    prev_close, live_price, source = None, None, None
+
+    if ticker.endswith(".NS"):
+        prev_close, live_price = nse_results.get(ticker[:-3], (None, None))
+        if prev_close is not None and live_price is not None:
+            source = "NSE"
+
+    if prev_close is None or live_price is None:
+        q_prev, q_live = yf_chart_results.get(ticker, (None, None))
+        if q_prev is not None and q_live is not None:
+            prev_close, live_price = q_prev, q_live
+            source = "yahoo-chart"
+
+    if prev_close is None or live_price is None:
+        fb_prev = get_prev_close_from_daily(
+            ticker, daily_batch, intraday_batch, n_tickers, today_india_date
+        )
+        fb_live = get_live_price_from_intraday(
+            ticker, intraday_batch, daily_batch, n_tickers
+        )
+        if fb_prev is not None and fb_live is not None:
+            prev_close, live_price = fb_prev, fb_live
+            source = "yfinance-daily-derived"
+
+    if prev_close is not None and live_price is not None and prev_close != 0:
+        quote_map[ticker] = (prev_close, live_price, today_india_date, source)
+        st.session_state["last_good_quotes"][ticker] = (
+            prev_close, live_price, today_india_date, source
+        )
+    else:
+        cached = st.session_state["last_good_quotes"].get(ticker)
+        if cached is not None:
+            # cached may be a 3-tuple from an older session (pre-source
+            # tracking); normalise to 4-tuple defensively.
+            if len(cached) == 3:
+                cached = (cached[0], cached[1], cached[2], "cached")
+            quote_map[ticker] = cached
+
+fetch_failed = len(quote_map) == 0
 
 if fetch_failed:
     st.warning(
-        "⚠️ Couldn't reach Yahoo Finance this refresh "
-        f"(timed out after {FETCH_TIMEOUT_SECONDS}s or request failed). "
+        "⚠️ Couldn't reach any price source this refresh "
+        "(NSE, Yahoo chart API, and Yahoo daily bars all failed). "
         "Showing last known values where available.",
         icon="⚠️",
     )
@@ -771,8 +1085,8 @@ st.write(f"Last Updated: {current_time}")
 # =========================
 
 fund_performance = []
-n_tickers = len(all_tickers)
 stale_this_cycle = set()
+source_counts = {}
 
 for fund_name, fund_data in funds.items():
 
@@ -785,28 +1099,18 @@ for fund_name, fund_data in funds.items():
 
     for ticker, weight in holdings.items():
 
-        previous_close, latest_close, as_of_date = (None, None, None)
+        quote = quote_map.get(ticker)
 
-        if not fetch_failed:
-            previous_close, latest_close, as_of_date = get_quote_from_batch(
-                ticker, batch_data, today_india_date, n_tickers
-            )
+        if quote is None:
+            skipped.append((ticker, weight, "No fresh or cached price available yet"))
+            continue
 
-        if previous_close is not None and latest_close is not None:
-            # Fresh, trustworthy data this cycle -> remember it
-            st.session_state["last_good_quotes"][ticker] = (
-                previous_close, latest_close, as_of_date
-            )
-        else:
-            # No fresh/trustworthy data this cycle -> fall back to the
-            # last known good quote for this ticker, if any
-            cached = st.session_state["last_good_quotes"].get(ticker)
-            if cached is not None:
-                previous_close, latest_close, as_of_date = cached
-                stale_this_cycle.add(ticker)
-            else:
-                skipped.append((ticker, weight, "No fresh or cached price available yet"))
-                continue
+        previous_close, latest_close, as_of_date, source = quote
+
+        if source not in ("NSE", "yahoo-chart"):
+            stale_this_cycle.add(ticker)
+
+        source_counts[source] = source_counts.get(source, 0) + 1
 
         change_percent = (
             (latest_close - previous_close) / previous_close
@@ -819,7 +1123,8 @@ for fund_name, fund_data in funds.items():
             "Stock": ticker,
             "Weight %": round(weight, 2),
             "Price Change %": round(change_percent, 2),
-            "Contribution": round(contribution, 3)
+            "Contribution": round(contribution, 3),
+            "Source": source,
         })
 
     expected_nav = previous_nav * (
@@ -890,17 +1195,42 @@ for fund_name, fund_data in funds.items():
             )
 
 # =====================================================
-# DATA FRESHNESS NOTICE
+# DATA FRESHNESS / SOURCE NOTICE
 # =====================================================
+
+st.markdown("---")
+
+with st.expander("🛠️ Debug: price source breakdown", expanded=False):
+    if source_counts:
+        st.dataframe(
+            pd.DataFrame(
+                [{"Source": s, "Tickers": c} for s, c in source_counts.items()]
+            ).sort_values(by="Tickers", ascending=False),
+            width="stretch"
+        )
+        st.caption(
+            "'NSE' and 'yahoo-chart' are authoritative, exchange/vendor-"
+            "stated quotes. 'yfinance-daily-derived' means both of those "
+            "failed for that ticker and it fell back to candle-derived "
+            "data -- the least reliable tier, worth checking individually "
+            "if a ticker still looks off. 'cached' means no source "
+            "responded this cycle and last-known-good was reused."
+        )
+    if nse_errors:
+        n_fail = len(nse_errors)
+        n_total = len(nse_eligible_symbols)
+        st.caption(
+            f"NSE failed for {n_fail}/{n_total} symbols this cycle "
+            "(common on Streamlit Community Cloud, which NSE tends to "
+            "bot-block -- the app then runs on the Yahoo chart tier)."
+        )
 
 if stale_this_cycle:
     sample = ", ".join(sorted(stale_this_cycle)[:8])
     more = f" +{len(stale_this_cycle) - 8} more" if len(stale_this_cycle) > 8 else ""
-    st.markdown("---")
     st.info(
-        f"ℹ️ {len(stale_this_cycle)} ticker(s) had no data fresher than "
-        f"{STALE_DATA_MAX_DAYS} days this refresh and are showing their "
-        f"last known good quote instead: {sample}{more}"
+        f"ℹ️ {len(stale_this_cycle)} ticker(s) are on the last-resort "
+        f"candle-derived tier or a cached value this refresh: {sample}{more}"
     )
 
 # =====================================================
