@@ -37,7 +37,7 @@ funds = {
     # "Bosch Home Comfort India Limited" (0.08%) is omitted - ticker could not be
     # confidently resolved on NSE.
     "HSBC Midcap Fund": {
-        "nav": 519.98,
+        "nav": 524.16
         "holdings": {
         "LENSKART.NS": 4.81,     # Lenskart Solutions Limited
         "MEESHO.NS": 4.00,       # Meesho Limited
@@ -114,7 +114,7 @@ funds = {
     # are marked as negligible (^, <0.01%) in the statement and are omitted
     # (no meaningful impact on NAV calc).
     "ICICI Midcap Fund": {
-        "nav": 365.66,
+        "nav": 371.18,
         "holdings": {
         "APARINDS.NS": 5.77,     # Apar Industries Ltd.
         "MCX.NS": 5.30,          # Multi Commodity Exchange Of India Ltd.
@@ -206,7 +206,7 @@ funds = {
     # confidently resolved on NSE. "Deepak Nitrite Ltd." (0.00%) is omitted
     # since it has no impact on the NAV calc.
     "Edelweiss Mid Cap Fund": {
-        "nav": 122.40,
+        "nav": 123.55,
         "holdings": {
             "FEDERALBNK.NS": 3.73,   # The Federal Bank Ltd.
             "MCX.NS": 2.69,          # Multi Commodity Exchange Of India Ltd.
@@ -313,7 +313,7 @@ funds = {
     # Auto Components - 0.34%) refer to the same listed company and are
     # combined into one SKFINDIA.NS holding (0.99%).
     "HDFC Mid Cap Fund": {
-        "nav": 220.49,
+        "nav": 222.03,
         "holdings": {
             "FEDERALBNK.NS": 4.21,
             "AUBANK.NS": 3.98,
@@ -403,7 +403,7 @@ funds = {
     # "Manipal Health Enterprises Ltd" (4.74%) is omitted - it is an
     # unlisted company and has no resolvable NSE ticker.
     "Invesco India Midcap Fund": {
-        "nav": 229.57,
+        "nav": 232.55,
         "holdings": {
             "PRESTIGE.NS": 7.27,     # Prestige Estates Projects Limited
             "MAXHEALTH.NS": 6.50,    # Max Healthcare Institute Limited
@@ -451,7 +451,7 @@ funds = {
     # Updated to Motilal Oswal Mutual Fund's Monthly Portfolio Statement
     # as on August 31, 2026 (equity holdings only; weights are "% to Net Assets").
     "Motilal Oswal Midcap Fund": {
-        "nav": 115.04,
+        "nav": 116.04,
         "holdings": {
             "PAYTM.NS": 9.07,        # One 97 Communications Limited
             "KALYANKJIL.NS": 8.13,   # Kalyan Jewellers India Limited
@@ -503,7 +503,7 @@ funds = {
     # Ltd (0.09%), Indiqube Spaces Ltd (0.09%), Orkla India Ltd (0.08%),
     # EMA Partners India Ltd (0.04%).
     "WhiteOak Capital Midcap Fund": {
-        "nav": 22.44,
+        "nav": 22.72,
         "holdings": {
             "MFSL.NS": 3.11,           # Max Financial Services Limited
             "COFORGE.NS": 2.95,        # Coforge Limited (2.91 cash + 0.04 future)
