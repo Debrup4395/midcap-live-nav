@@ -37,7 +37,7 @@ funds = {
     # "Bosch Home Comfort India Limited" (0.08%) is omitted - ticker could not be
     # confidently resolved on NSE.
     "HSBC Midcap Fund": {
-        "nav": 524.16
+        "nav": 524.16,
         "holdings": {
         "LENSKART.NS": 4.81,     # Lenskart Solutions Limited
         "MEESHO.NS": 4.00,       # Meesho Limited
