@@ -453,36 +453,36 @@ funds = {
     "Motilal Oswal Midcap Fund": {
         "nav": 113.67,
         "holdings": {
-            "PAYTM.NS": 9.07,        # One 97 Communications Limited
-            "KALYANKJIL.NS": 8.13,   # Kalyan Jewellers India Limited
-            "ETERNAL.NS": 6.46,      # Eternal Limited
-            "COFORGE.NS": 5.79,      # Coforge Limited
-            "KEI.NS": 5.16,          # KEI Industries Limited
-            "ABCAPITAL.NS": 4.87,    # Aditya Birla Capital Limited
-            "PERSISTENT.NS": 4.41,   # Persistent Systems Ltd
-            "SHRIRAMFIN.NS": 3.66,   # Shriram Finance Limited
-            "DIXON.NS": 3.44,        # Dixon Technologies (India) Limited
-            "GROWW.NS": 3.43,        # Billionbrains Garage Ventures Ltd (Groww)
-            "MCX.NS": 3.43,          # Multi Commodity Exchange of India Limited
-            "STLTECH.NS": 3.30,      # Sterlite Technologies Limited
-            "POLICYBZR.NS": 2.85,    # PB Fintech Limited
-            "TIINDIA.NS": 2.67,      # Tube Investments Of India Limited
-            "LTF.NS": 2.40,          # L&T Finance Limited
-            "ICICIAMC.NS": 2.39,     # ICICI Prudential Asset Management Company Limited
-            "PRESTIGE.NS": 2.37,     # Prestige Estates Projects Limited
-            "BHARTIHEXA.NS": 2.27,   # Bharti Hexacom Limited
-            "LENSKART.NS": 2.26,     # Lenskart Solutions Limited
-            "MOTHERSON.NS": 2.21,    # Samvardhana Motherson International Limited
-            "SUZLON.NS": 2.16,       # Suzlon Energy Limited
-            "IDFCFIRSTB.NS": 2.13,   # IDFC First Bank Limited
-            "PREMIERENE.NS": 2.03,   # Premier Energies Limited
-            "BEL.NS": 1.90,          # Bharat Electronics Limited
-            "BSE.NS": 1.76,          # BSE Limited
-            "INDIGO.NS": 1.73,       # InterGlobe Aviation Limited
-            "WAAREEENER.NS": 1.48,   # Waaree Energies Limited
-            "MAXHEALTH.NS": 1.29,    # Max Healthcare Institute Limited
-            "ADANIENT.NS": 0.81,     # Adani Enterprises Limited
-            "PWL.NS": 0.52,          # PhysicsWallah Limited
+            "PAYTM.NS": 8.64,        # One 97 Communications Limited
+            "KALYANKJIL.NS": 7.98,   # Kalyan Jewellers India Limited
+            "ETERNAL.NS": 6.72,      # Eternal Limited
+            "COFORGE.NS": 5.43,      # Coforge Limited
+            "KEI.NS": 4.27,          # KEI Industries Limited
+            "ABCAPITAL.NS": 4.64,    # Aditya Birla Capital Limited
+            "PERSISTENT.NS": 4.43,   # Persistent Systems Ltd
+            "SHRIRAMFIN.NS": 3.40,   # Shriram Finance Limited
+            "DIXON.NS": 3.43,        # Dixon Technologies (India) Limited
+            "GROWW.NS": 3.50,        # Billionbrains Garage Ventures Ltd (Groww)
+            "MCX.NS": 3.74,          # Multi Commodity Exchange of India Limited
+            "STLTECH.NS": 4.40,      # Sterlite Technologies Limited
+            "POLICYBZR.NS": 1.72,    # PB Fintech Limited
+            "TIINDIA.NS": 2.43,      # Tube Investments Of India Limited
+            "LTF.NS": 2.11,          # L&T Finance Limited
+            "ICICIAMC.NS": 2.60,     # ICICI Prudential Asset Management Company Limited
+            "PRESTIGE.NS": 2.20,     # Prestige Estates Projects Limited
+            "BHARTIHEXA.NS": 2.23,   # Bharti Hexacom Limited
+            "LENSKART.NS": 2.94,     # Lenskart Solutions Limited
+            "MOTHERSON.NS": 2.26,    # Samvardhana Motherson International Limited
+            "SUZLON.NS": 1.91,       # Suzlon Energy Limited
+            "IDFCFIRSTB.NS": 2.40,   # IDFC First Bank Limited
+            "PREMIERENE.NS": 1.82,   # Premier Energies Limited
+            "BEL.NS": 1.89,          # Bharat Electronics Limited
+            "BSE.NS": 1.75,          # BSE Limited
+            "INDIGO.NS": 1.75,       # InterGlobe Aviation Limited
+            "WAAREEENER.NS": 1.43,   # Waaree Energies Limited
+            "MAXHEALTH.NS": 1.33,    # Max Healthcare Institute Limited
+            "ADANIENT.NS": 0.87,     # Adani Enterprises Limited
+            "PWL.NS": 0.59,          # PhysicsWallah Limited
         }
     },
 
