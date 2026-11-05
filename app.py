@@ -625,6 +625,11 @@ n_tickers = len(all_tickers)
 
 quote_map = {}
 
+# Fetch the cache dict HERE (not at the top of the script). A slow fetch
+# can be interrupted by the 60s autorefresh rerun, and Streamlit may have
+# reset session_state by the time this point is reached.
+good_quotes = st.session_state.setdefault("last_good_quotes", {})
+
 for ticker in all_tickers:
 
     prev_close, live_price, source = None, None, None
@@ -653,11 +658,11 @@ for ticker in all_tickers:
 
     if prev_close is not None and live_price is not None and prev_close != 0:
         quote_map[ticker] = (prev_close, live_price, today_india_date, source)
-        st.session_state["last_good_quotes"][ticker] = (
+        good_quotes[ticker] = (
             prev_close, live_price, today_india_date, source
         )
     else:
-        cached = st.session_state["last_good_quotes"].get(ticker)
+        cached = good_quotes.get(ticker)
         if cached is not None:
             if len(cached) == 3:
                 cached = (cached[0], cached[1], cached[2], "cached")
