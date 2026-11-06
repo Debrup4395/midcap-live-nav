@@ -36,7 +36,7 @@ funds = {
     # HSBC Midcap Fund - 30-Sep-2026. 0.00% lines omitted (Eternal, Biocon,
     # Schaeffler, Billionbrains, Abbott, Gabriel, NTPC Green).
     "HSBC Midcap Fund": {
-        "nav": 517.63,
+        "nav": 524.81,
         "holdings": {
             "LENSKART.NS": 5.08, "MEESHO.NS": 5.04, "FEDERALBNK.NS": 3.90,
             "CPPLUS.NS": 3.64, "PIRAMALFIN.NS": 3.56, "NYKAA.NS": 3.38,
@@ -66,7 +66,7 @@ funds = {
     # ICICI Prudential Mid Cap Fund - 30-Sep-2026. CRISIL and GSPL India
     # Transco are "^" (<0.01%) and omitted.
     "ICICI Midcap Fund": {
-        "nav": 368.53,
+        "nav": 372.88,
         "holdings": {
             "APARINDS.NS": 5.98, "HINDPETRO.NS": 5.43, "MCX.NS": 5.43,
             "JINDALSTEL.NS": 3.97, "APLAPOLLO.NS": 3.95, "BSE.NS": 3.93,
@@ -104,7 +104,7 @@ funds = {
     # NEW tickers worth a quick check: WELCORP, NTPCGREEN, SCHNEIDER,
     # URBANCO, ABSLAMC.
     "Edelweiss Mid Cap Fund": {
-        "nav": 123.13,
+        "nav": 125.29,
         "holdings": {
             "FEDERALBNK.NS": 3.06, "MCX.NS": 2.70, "SOLARINDS.NS": 2.09,
             "CUB.NS": 2.02, "PERSISTENT.NS": 1.99, "COFORGE.NS": 1.98,
@@ -147,7 +147,7 @@ funds = {
     # HDFC Mid Cap Fund - 30-Sep-2026 ("% to NAV"). The two SKF India lines
     # (0.64 Industrial + 0.35) are combined into SKFINDIA.NS (0.99).
     "HDFC Mid Cap Fund": {
-        "nav": 223.14,
+        "nav": 226.14,
         "holdings": {
             "FEDERALBNK.NS": 3.98, "AUBANK.NS": 3.94, "MFSL.NS": 3.52,
             "IPCALAB.NS": 3.43, "GLENMARK.NS": 3.07, "BALKRISIND.NS": 2.98,
@@ -181,7 +181,7 @@ funds = {
     # Invesco India Midcap Fund - 30-Sep-2026. Omitted (unlisted):
     # Manipal Health Enterprises (4.44%), National Stock Exchange of India (0.12%).
     "Invesco India Midcap Fund": {
-        "nav": 233.94,
+        "nav": 238.94,
         "holdings": {
             "PRESTIGE.NS": 7.33, "MAXHEALTH.NS": 7.21, "MEESHO.NS": 5.42,
             "FEDERALBNK.NS": 5.37, "ETERNAL.NS": 4.14, "MEDANTA.NS": 3.97,
@@ -202,7 +202,7 @@ funds = {
 
     # Motilal Oswal Midcap Fund - ALREADY UPDATED (left unchanged).
     "Motilal Oswal Midcap Fund": {
-        "nav": 115.88,
+        "nav": 119.01,
         "holdings": {
             "PAYTM.NS": 8.64,        # One 97 Communications Limited
             "KALYANKJIL.NS": 7.98,   # Kalyan Jewellers India Limited
@@ -247,7 +247,7 @@ funds = {
     # (0.11), Indiqube Spaces (0.10), Orkla India (0.08), EMA Partners (0.04).
     # Blue Star is 0.00% and omitted.
     "WhiteOak Capital Midcap Fund": {
-        "nav": 22.67,
+        "nav": 22.97,
         "holdings": {
             "BHARTIHEXA.NS": 2.78, "COFORGE.NS": 2.73, "FEDERALBNK.NS": 2.50,
             "MFSL.NS": 2.48, "LAURUSLABS.NS": 2.20, "MOTILALOFS.NS": 2.05,
