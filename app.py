@@ -182,7 +182,7 @@ funds = {
     # Invesco India Midcap Fund - 30-Sep-2026. Omitted (unlisted):
     # Manipal Health Enterprises (4.44%), National Stock Exchange of India (0.12%).
     "Invesco India Midcap Fund": {
-        "nav": 240.40,
+        "nav": 244.46,
         "holdings": {
             "PRESTIGE.NS": 7.33, "MAXHEALTH.NS": 7.21, "MEESHO.NS": 5.42,
             "FEDERALBNK.NS": 5.37, "ETERNAL.NS": 4.14, "MEDANTA.NS": 3.97,
