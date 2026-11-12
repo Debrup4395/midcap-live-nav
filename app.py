@@ -37,7 +37,7 @@ funds = {
     # HSBC Midcap Fund - 30-Sep-2026. 0.00% lines omitted (Eternal, Biocon,
     # Schaeffler, Billionbrains, Abbott, Gabriel, NTPC Green).
     "HSBC Midcap Fund": {
-        "nav": 524.22,
+        "nav": 528.96,
         "holdings": {
             "LENSKART.NS": 5.08, "MEESHO.NS": 5.04, "FEDERALBNK.NS": 3.90,
             "CPPLUS.NS": 3.64, "PIRAMALFIN.NS": 3.56, "NYKAA.NS": 3.38,
@@ -67,7 +67,7 @@ funds = {
     # ICICI Prudential Mid Cap Fund - 30-Sep-2026. CRISIL and GSPL India
     # Transco are "^" (<0.01%) and omitted.
     "ICICI Midcap Fund": {
-        "nav": 371.56,
+        "nav": 377.47,
         "holdings": {
             "APARINDS.NS": 5.98, "HINDPETRO.NS": 5.43, "MCX.NS": 5.43,
             "JINDALSTEL.NS": 3.97, "APLAPOLLO.NS": 3.95, "BSE.NS": 3.93,
@@ -105,7 +105,7 @@ funds = {
     # NEW tickers worth a quick check: WELCORP, NTPCGREEN, SCHNEIDER,
     # URBANCO, ABSLAMC.
     "Edelweiss Mid Cap Fund": {
-        "nav": 125.72,
+        "nav": 127.01,
         "holdings": {
             "FEDERALBNK.NS": 3.06, "MCX.NS": 2.70, "SOLARINDS.NS": 2.09,
             "CUB.NS": 2.02, "PERSISTENT.NS": 1.99, "COFORGE.NS": 1.98,
@@ -148,7 +148,7 @@ funds = {
     # HDFC Mid Cap Fund - 30-Sep-2026 ("% to NAV"). The two SKF India lines
     # (0.64 Industrial + 0.35) are combined into SKFINDIA.NS (0.99).
     "HDFC Mid Cap Fund": {
-        "nav": 227.10,
+        "nav": 229.55,
         "holdings": {
             "FEDERALBNK.NS": 3.98, "AUBANK.NS": 3.94, "MFSL.NS": 3.52,
             "IPCALAB.NS": 3.43, "GLENMARK.NS": 3.07, "BALKRISIND.NS": 2.98,
@@ -205,7 +205,7 @@ funds = {
     # TREPS (4.39%) and net receivables (0.40%) excluded.
     # NEW vs September: MEESHO. All 31 listed holdings carried over below.
     "Motilal Oswal Midcap Fund": {
-        "nav": 119.11,   # statement has no per-unit NAV -- swap in latest NAV
+        "nav": 120.81,   # statement has no per-unit NAV -- swap in latest NAV
         "holdings": {
             "PAYTM.NS": 8.54,        # One 97 Communications Limited
             "ETERNAL.NS": 7.32,      # Eternal Limited
@@ -251,7 +251,7 @@ funds = {
     # (0.11), Indiqube Spaces (0.10), Orkla India (0.08), EMA Partners (0.04).
     # Blue Star is 0.00% and omitted.
     "WhiteOak Capital Midcap Fund": {
-        "nav": 23.06,
+        "nav": 23.30,
         "holdings": {
             "BHARTIHEXA.NS": 2.78, "COFORGE.NS": 2.73, "FEDERALBNK.NS": 2.50,
             "MFSL.NS": 2.48, "LAURUSLABS.NS": 2.20, "MOTILALOFS.NS": 2.05,
